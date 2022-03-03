@@ -1,0 +1,81 @@
+{
+  "name": "esm-loader-manager",
+  "version": "0.0.0",
+  "description": "Allows to use several ESM loaders in one Node.js application.",
+  "type": "module",
+  "exports": {
+    "node": "./dist/esm-loader-manager.cjs",
+    "import": "./dist/esm-loader-manager.mjs"
+  },
+  "main": "dist/esm-loader-manager.cjs",
+  "types": "esm-loader-manager.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js,.cjs,.mjs ./src/**/*.js ./tests/**/*.js",
+    "pretest": "npm run lint",
+    "test": "ava",
+    "build": "rlb"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Comandeer/esm-loader-manager.git"
+  },
+  "keywords": [
+    "esm",
+    "esm-loader",
+    "loader"
+  ],
+  "author": "Comandeer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Comandeer/esm-loader-manager/issues"
+  },
+  "homepage": "https://github.com/Comandeer/esm-loader-manager#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitplease": {
+    "nohook": true,
+    "style": "angular",
+    "types": [
+      "feat",
+      "improvement",
+      "fix",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "build",
+      "ci",
+      "chore",
+      "revert"
+    ],
+    "scope": "\\S+.*"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "dist/**/*.js",
+      "tests/**/*.js"
+    ]
+  },
+  "devDependencies": {
+    "@comandeer/eslint-config": "^0.5.0",
+    "@comandeer/rollup-lib-bundler": "^0.14.0",
+    "ava": "^4.0.1",
+    "commitplease": "^3.2.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.10.0",
+    "husky": "^7.0.4"
+  }
+}

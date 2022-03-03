@@ -1,0 +1,16 @@
+node_modules/
+*.*~
+*.db
+.goutputstream-*
+*.bac
+/.project
+coverage/
+.coverage/
+dist
+docs/dist
+npm-debug.log
+/.nyc_output
+.vscode/
+.fixtures-temp
+/codecov
+/codecov.exe
