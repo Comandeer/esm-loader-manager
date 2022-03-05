@@ -1,3 +1,36 @@
 {
-	"extends": "@comandeer/eslint-config"
+	"extends": "@comandeer/eslint-config",
+	"overrides": [
+		{
+			"files": [ "tests/**/*.js" ],
+			"excludedFiles": [ "tests/__fixtures__/**/*.js" ],
+			"env": {
+				"browser": false,
+				"commonjs": false,
+				"es6": true,
+				"node": true,
+				"mocha": false
+			},
+			"globals": {
+				"expect": "off",
+				"sinon": "off",
+				"proxyquire": "off"
+			},
+			"rules": {
+				"mocha/handle-done-callback": "off",
+				"mocha/max-top-level-suites": "off",
+				"mocha/no-async-describe": "off",
+				"mocha/no-exclusive-tests": "off",
+				"mocha/no-exports": "off",
+				"mocha/no-global-tests": "off",
+				"mocha/no-identical-title": "off",
+				"mocha/no-nested-tests": "off",
+				"mocha/no-pending-tests": "off",
+				"mocha/no-return-and-callback": "off",
+				"mocha/no-sibling-hooks": "off",
+				"mocha/no-skipped-tests": "off",
+				"mocha/no-top-level-hooks": "off"
+			}
+		}
+	]
 }
