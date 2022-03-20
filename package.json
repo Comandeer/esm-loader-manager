@@ -70,7 +70,7 @@
     ]
   },
   "devDependencies": {
-    "@comandeer/eslint-config": "^0.5.0",
+    "@comandeer/eslint-config": "^0.7.0",
     "@comandeer/rollup-lib-bundler": "^0.15.1",
     "ava": "^4.0.1",
     "c8": "^7.11.0",
