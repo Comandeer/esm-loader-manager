@@ -18,7 +18,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.cjs,.mjs ./src/**/*.js ./tests/**/*.js",
     "pretest": "npm run lint",
-    "test": "ava",
+    "test": "c8 ava",
     "build": "rlb"
   },
   "repository": {
@@ -73,6 +73,7 @@
     "@comandeer/eslint-config": "^0.5.0",
     "@comandeer/rollup-lib-bundler": "^0.15.1",
     "ava": "^4.0.1",
+    "c8": "^7.11.0",
     "commitplease": "^3.2.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.10.0",
