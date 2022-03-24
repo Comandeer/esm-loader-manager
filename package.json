@@ -60,15 +60,6 @@
     ],
     "scope": "\\S+.*"
   },
-  "nyc": {
-    "include": [
-      "src/**/*.js"
-    ],
-    "exclude": [
-      "dist/**/*.js",
-      "tests/**/*.js"
-    ]
-  },
   "devDependencies": {
     "@comandeer/eslint-config": "^0.8.0",
     "@comandeer/rollup-lib-bundler": "^0.15.1",
