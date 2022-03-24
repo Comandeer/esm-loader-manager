@@ -1,9 +1,9 @@
 import test from 'ava';
+import LoaderManager from '../src/LoaderManager.js';
 
-test( 'package exports correct exports', async ( t ) => {
+test( 'package exports correct export', async ( t ) => {
 	const expectedImports = [
-		'addLoader',
-		'removeLoader'
+		'default'
 	];
 
 	// Emulate the actual loader.
@@ -13,4 +13,5 @@ test( 'package exports correct exports', async ( t ) => {
 	const actualImports = Object.keys( pkg );
 
 	t.deepEqual( actualImports, expectedImports );
+	t.true( pkg.default instanceof LoaderManager );
 } );
