@@ -12,7 +12,7 @@
  */
 
 /**
- * @param {ava:ExecutionContext<unknown>} t Test execution context
+ * @param {import('ava').ExecutionContext<unknown>} t Test execution context
  * @param {AssertParameterOptions} [options]
  * @returns {void}
  */
