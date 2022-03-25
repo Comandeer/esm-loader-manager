@@ -14,7 +14,7 @@ test( 'loader manager raises an error if the loader was not loaded properly', cr
 		simpleLoaderFixturePath
 	],
 	callback( t, { exitCode, stderr } ) {
-		const loaderManagerErrorRegex = /TypeError: Provide a valid collection of loaders/;
+		const loaderManagerErrorRegex = /The ESM Loader Manager cannot be used without the actual loader/;
 
 		t.is( exitCode, 1 );
 		t.regex( stderr, loaderManagerErrorRegex );
