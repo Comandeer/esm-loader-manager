@@ -1,7 +1,7 @@
-import { fileURLToPath } from 'url';
 import { resolve as resolvePath } from 'path';
 import { existsSync as fileExists } from 'fs';
-import { readFile } from 'fs/promises';
+import { createModuleURL } from './utilities.js';
+import { loadURL } from './utilities.js';
 
 const cwd = process.cwd();
 const loaderFileName = '.esmlm.js';
@@ -51,20 +51,6 @@ async function load( url, context, defaultLoad ) {
 		format: 'module',
 		source
 	};
-}
-
-function createModuleURL( specifier, { parentURL } ) {
-	if ( parentURL ) {
-		return new URL( specifier, parentURL ).href;
-	}
-
-	return new URL( specifier ).href;
-}
-
-async function loadURL( url ) {
-	const path = fileURLToPath( url );
-
-	return readFile( path );
 }
 
 export { resolve };
