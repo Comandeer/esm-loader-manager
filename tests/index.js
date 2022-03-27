@@ -6,9 +6,6 @@ test( 'package exports correct export', async ( t ) => {
 		'default'
 	];
 
-	// Emulate the actual loader.
-	globalThis.__ESMLM__ = [];
-
 	const pkg = await import( '../src/index.js' );
 	const actualImports = Object.keys( pkg );
 
