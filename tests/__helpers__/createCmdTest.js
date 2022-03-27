@@ -12,6 +12,7 @@ import { execa } from 'execa';
  * @property {string} cmd Command to execute;
  * @property {Array<string>} [params=[]] Command's parameters.
  * @property {string} [cwd=process.cwd()] CWD for tee command
+ * @property {Record<string, string>} [env={}] Additional environment variables to pass to the command.
  * @property {CmdTestCallback} callback
  */
 
@@ -23,6 +24,7 @@ function createCmdTest( {
 	cmd,
 	callback,
 	params = [],
+	env = {},
 	cwd = process.cwd()
 } = {} ) {
 	return async ( t ) => {
@@ -30,7 +32,8 @@ function createCmdTest( {
 
 		try {
 			result = await execa( cmd, params, {
-				cwd
+				cwd,
+				env
 			} );
 		} catch ( error ) {
 			result = error;
