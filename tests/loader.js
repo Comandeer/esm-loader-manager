@@ -21,6 +21,6 @@ test( 'loader raises an error if loaders\' definitions are not found', createLoa
 test( 'loader correctly uses user-provided loader', createLoaderTest( {
 	fixturePath: simpleLoaderFixturePath,
 	callback( t, { stdout } ) {
-		t.is( stdout, '"hublabubla"' );
+		t.is( stdout, 'hublabubla' );
 	}
 } ) );
