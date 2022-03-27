@@ -4,7 +4,7 @@ import { createModuleURL } from './utilities.js';
 import { loadURL } from './utilities.js';
 
 const cwd = process.cwd();
-const loaderFileName = '.esmlm.js';
+const loaderFileName = 'ESMLM_CONFIG' in process.env ? process.env.ESMLM_CONFIG : '.esmlm.js';
 const loaderPath = resolvePath( cwd, loaderFileName );
 let loaders = [];
 
