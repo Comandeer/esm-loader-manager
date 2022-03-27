@@ -1,7 +1,7 @@
 export default [
 	{
-		matcher() {
-			return true;
+		matcher( url ) {
+			return url.endsWith( 'module.js' );
 		},
 		loader() {
 			return 'export default "hublabubla";'
