@@ -1,9 +1,18 @@
 import { resolve as resolvePath } from 'path';
+import { existsSync as fileExists } from 'fs';
 
 const cwd = process.cwd();
 const loaderFileName = '.esmlm.js';
 const loaderPath = resolvePath( cwd, loaderFileName );
-const { default: loaders } = await import( loaderPath );
+let loaders = [];
+
+if ( fileExists( loaderPath ) ) {
+	const { default: loadedLoaders } = await import( loaderPath );
+
+	loaders = loadedLoaders;
+} else {
+	console.warn( 'ESMLM: The file with loaders\' definition was not found.' ); // eslint-disable-line no-console
+}
 
 export async function resolve( specifier, context, defaultResolve ) {
 	const isAnyLoaderForSpecifier = loaders.some( ( { matcher } ) => {
