@@ -26,7 +26,7 @@ function createLoaderTest( {
 	fixturePath,
 	callback: userCallback
 } = {} ) {
-	const loaderPath = resolvePath( __dirname, '..', '..', 'src', 'loader.js' );
+	const loaderPath = resolvePath( __dirname, '..', '..', 'src', 'index.js' );
 	const cmd = 'node';
 	const params = [
 		'--experimental-loader',
