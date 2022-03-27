@@ -1,7 +1,7 @@
 import { resolve as resolvePath } from 'path';
 
 const cwd = process.cwd();
-const loaderFileName = '__ESMLM__.js';
+const loaderFileName = '.esmlm.js';
 const loaderPath = resolvePath( cwd, loaderFileName );
 const { default: loaders } = await import( loaderPath );
 
