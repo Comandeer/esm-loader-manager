@@ -142,3 +142,32 @@ test( '#removeLoader() does nothing if the provided loader is not present', ( t 
 
 	t.deepEqual( loaders, expectedLoaders );
 } );
+
+test( '#getAll() returns all loaders from the given manager', ( t ) => {
+	const loader1 = {
+		matcher() {
+			return true;
+		},
+		loader() {}
+	};
+	const loader2 = {
+		matcher() {
+			return false;
+		},
+		loader() {}
+	}
+	const expectedLoaders = [
+		loader1,
+		loader2
+	];
+	const loaders = [];
+	const loaderManager = new LoaderManager( loaders );
+
+	loaderManager.addLoader( loader1 );
+	loaderManager.addLoader( loader2 );
+
+	const actualLoaders = loaderManager.getAll();
+
+	t.deepEqual( actualLoaders, expectedLoaders );
+	t.is( actualLoaders, loaders );
+} );

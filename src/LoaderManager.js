@@ -49,6 +49,13 @@ class LoaderManager {
 		this.#loaders.splice( loaderIndex, 1 );
 	}
 
+	/**
+	 * @returns {Array<Loader>}
+	 */
+	getAll() {
+		return this.#loaders;
+	}
+
 	#validateLoader( loader ) {
 		if ( !loader || typeof loader !== 'object' ) {
 			return false;
