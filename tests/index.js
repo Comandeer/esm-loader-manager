@@ -1,6 +1,6 @@
 import test from 'ava';
 
-test( 'package exports correct export', async ( t ) => {
+test( 'package exports correct exports', async ( t ) => {
 	const expectedImports = [
 		'load',
 		'resolve'
