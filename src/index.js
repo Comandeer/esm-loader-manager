@@ -14,7 +14,7 @@ if ( fileExists( loaderPath ) ) {
 	console.warn( 'ESMLM: The file with loaders\' definition was not found.' ); // eslint-disable-line no-console
 }
 
-export async function resolve( specifier, context, defaultResolve ) {
+async function resolve( specifier, context, defaultResolve ) {
 	const isAnyLoaderForSpecifier = loaders.some( ( { matcher } ) => {
 		return matcher( specifier, context );
 	} );
@@ -30,7 +30,7 @@ export async function resolve( specifier, context, defaultResolve ) {
 	return defaultResolve( specifier, context, defaultResolve );
 }
 
-export async function load( url, context, defaultLoad ) {
+async function load( url, context, defaultLoad ) {
 	return defaultLoad( url, context, defaultLoad );
 }
 
@@ -41,3 +41,6 @@ function createModuleURL( specifier, { parentURL } ) {
 
 	return new URL( specifier ).href;
 }
+
+export { resolve };
+export { load };
