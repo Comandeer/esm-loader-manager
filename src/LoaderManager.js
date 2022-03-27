@@ -8,9 +8,9 @@ class LoaderManager {
 	#loaders;
 
 	/**
-	 * @param {Array<Loader>} loaders The collection of loaders to manage.
+	 * @param {Array<Loader>} [loaders=[]] The collection of loaders to manage.
 	 */
-	constructor( loaders ) {
+	constructor( loaders = [] ) {
 		if ( !Array.isArray( loaders ) ) {
 			throw new TypeError( 'Provide a valid collection of loaders' );
 		}

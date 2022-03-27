@@ -10,7 +10,6 @@ test( 'constructor requires an array', ( t ) => {
 	assertParameter( t, {
 		invalids: [
 			'',
-			undefined,
 			null,
 			function() {},
 			{},
@@ -18,6 +17,7 @@ test( 'constructor requires an array', ( t ) => {
 			{ length: 0 }
 		],
 		valids: [
+			undefined,
 			[]
 		],
 		error: {
