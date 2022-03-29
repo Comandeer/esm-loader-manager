@@ -35,6 +35,35 @@ async function resolveProjectRoot( startDir ) {
 	return resolveProjectRoot( dirUp );
 }
 
+const configFileName = '.esmlm';
+const configFileExtensions = [
+	'.js'
+];
+
+async function resolveConfigFile( startDir, projectRoot ) {
+	const files = await readdir( startDir );
+
+	for ( const extension of configFileExtensions ) {
+		const configFileFullName = `${ configFileName }${ extension }`;
+
+		if ( files.includes( configFileFullName ) ) {
+			const resolvedConfigFilePath = resolvePath( startDir, configFileFullName );
+
+			return resolvedConfigFilePath;
+		}
+	}
+
+	// Do not go outside of the project root.
+	if ( startDir === projectRoot ) {
+		return null;
+	}
+
+	const dirUp = resolvePath( startDir, '..' );
+
+	return resolveConfigFile( dirUp );
+}
+
 export { createModuleURL };
 export { loadURL };
 export { resolveProjectRoot };
+export { resolveConfigFile };
