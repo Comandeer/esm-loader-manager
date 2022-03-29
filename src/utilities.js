@@ -35,7 +35,7 @@ async function resolveProjectRoot( startDir ) {
 	return resolveProjectRoot( dirUp );
 }
 
-const configFileName = '.esmlm';
+const configFileName = '.esmlmrc';
 const configFileExtensions = [
 	'.js'
 ];
