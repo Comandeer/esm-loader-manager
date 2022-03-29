@@ -10,12 +10,15 @@ import { resolveProjectRoot } from '../src/utilities.js';
 const __dirname = dirname( fileURLToPath( import.meta.url ) );
 const fixtureDirPath = resolvePath( __dirname, '__fixtures__' );
 const configFileName = '.esmlmrc.js';
+const configModuleFileName = '.esmlmrc.mjs';
 const dummyPath = resolvePath( fixtureDirPath, 'dummy.txt' );
 const simpleLoaderDirPath = resolvePath( fixtureDirPath, 'simpleLoader' );
 const nestedLoaderDirPath = resolvePath( fixtureDirPath, 'nested' );
 const nestedLoaderLevel1DirPath = resolvePath( nestedLoaderDirPath, 'level1' );
 const nestedLoaderLevel2DirPath = resolvePath( nestedLoaderLevel1DirPath, 'level2' );
 const nestedLoaderLevel3DirPath = resolvePath( nestedLoaderLevel2DirPath, 'level3' );
+const moduleConfigFileDirPath = resolvePath( fixtureDirPath, 'moduleConfigFile' );
+const multipleConfigFilesDirPath = resolvePath( fixtureDirPath, 'multipleConfigFiles' );
 
 test( 'createModuleURL() creates URL from the given specifier', ( t ) => {
 	const specifier = './test.js';
@@ -41,7 +44,7 @@ test( 'resolveProjectRoot() points to the directory with the nearest package.jso
 	t.is( resolvedProjectRoot, simpleLoaderDirPath );
 } );
 
-test( 'resolveProjectRoot() points to the directory with the nearest package.json file (nested)', async ( t ) => {
+test( 'resolveProjectRoot() points to the directory with the nearest package.json file (deeply nested dir)', async ( t ) => {
 	const resolvedProjectRoot = await resolveProjectRoot( nestedLoaderLevel3DirPath );
 
 	t.is( resolvedProjectRoot, nestedLoaderDirPath );
@@ -64,6 +67,20 @@ test( 'resolveConfigFile() points to the nearest .esmlmrc.js file (nested dir)',
 test( 'resolveConfigFile() points to the nearest .esmlmrc.js file (deeply nested dir)', async ( t ) => {
 	const expectedConfigFilePath = resolvePath( nestedLoaderLevel2DirPath, configFileName );
 	const resolvedConfigFilePath = await resolveConfigFile( nestedLoaderLevel3DirPath, nestedLoaderDirPath );
+
+	t.is( resolvedConfigFilePath, expectedConfigFilePath );
+} );
+
+test( 'resolveConfigFile() points to the nearest .esmlmrc.mjs file', async ( t ) => {
+	const expectedConfigFilePath = resolvePath( moduleConfigFileDirPath, configModuleFileName );
+	const resolvedConfigFilePath = await resolveConfigFile( moduleConfigFileDirPath, moduleConfigFileDirPath );
+
+	t.is( resolvedConfigFilePath, expectedConfigFilePath );
+} );
+
+test( 'resolveConfigFile() prefers .esmlmrc.js over .esmlmrc.mjs', async ( t ) => {
+	const expectedConfigFilePath = resolvePath( multipleConfigFilesDirPath, configFileName );
+	const resolvedConfigFilePath = await resolveConfigFile( multipleConfigFilesDirPath, multipleConfigFilesDirPath );
 
 	t.is( resolvedConfigFilePath, expectedConfigFilePath );
 } );

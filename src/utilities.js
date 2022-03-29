@@ -37,7 +37,8 @@ async function resolveProjectRoot( startDir ) {
 
 const configFileName = '.esmlmrc';
 const configFileExtensions = [
-	'.js'
+	'.js',
+	'.mjs'
 ];
 
 async function resolveConfigFile( startDir, projectRoot ) {
