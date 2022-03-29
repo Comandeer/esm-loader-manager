@@ -9,6 +9,11 @@ const fixtureDirPath = resolvePath( __dirname, '__fixtures__' );
 const simpleLoaderFixturePath = resolvePath( fixtureDirPath, 'simpleLoader' );
 const withoutLoaderFileFixturePath = resolvePath( fixtureDirPath, 'projectWithoutLoaderFile' );
 const customConfigFileFixturePath = resolvePath( fixtureDirPath, 'customConfigFile' );
+const moduleConfigFileFixturePath = resolvePath( fixtureDirPath, 'moduleConfigFile' );
+const nestedLoaderFixturePath = resolvePath( fixtureDirPath, 'nested' );
+const nestedLoaderLevel1DirPath = resolvePath( nestedLoaderFixturePath, 'level1' );
+const nestedLoaderLevel2DirPath = resolvePath( nestedLoaderLevel1DirPath, 'level2' );
+const nestedLoaderLevel3DirPath = resolvePath( nestedLoaderLevel2DirPath, 'level3' );
 
 test( 'loader raises an error if loaders\' definitions are not found', createLoaderTest( {
 	fixturePath: withoutLoaderFileFixturePath,
@@ -26,7 +31,7 @@ test( 'loader correctly uses user-provided loader', createLoaderTest( {
 	}
 } ) );
 
-test( 'path to the file can be passed as environment variable (relative one)', createLoaderTest( {
+test( 'path to the config file can be passed as environment variable (relative one)', createLoaderTest( {
 	fixturePath: customConfigFileFixturePath,
 	env: {
 		ESMLM_CONFIG: './customConfig.mjs'
@@ -36,12 +41,35 @@ test( 'path to the file can be passed as environment variable (relative one)', c
 	}
 } ) );
 
-test( 'path to the file can be passed as environment variable (absolute one)', createLoaderTest( {
+test( 'path to the config file can be passed as environment variable (absolute one)', createLoaderTest( {
 	fixturePath: customConfigFileFixturePath,
 	env: {
 		ESMLM_CONFIG: resolvePath( customConfigFileFixturePath, 'customConfig.mjs' )
 	},
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
+	}
+} ) );
+
+test( 'module config file works correctly', createLoaderTest( {
+	fixturePath: moduleConfigFileFixturePath,
+	callback( t, { stdout } ) {
+		t.is( stdout, 'true' );
+	}
+} ) );
+
+test( 'nested module uses correct config file', createLoaderTest( {
+	fixturePath: nestedLoaderLevel1DirPath,
+	entryPoint: 'someNestedModule.js',
+	callback( t, { stdout } ) {
+		t.is( stdout, 'true' );
+	}
+} ) );
+
+test( 'deeply nested module uses correct config file', createLoaderTest( {
+	fixturePath: nestedLoaderLevel3DirPath,
+	entryPoint: 'superDeeplyNested.js',
+	callback( t, { stdout } ) {
+		t.is( stdout, 'nested' );
 	}
 } ) );

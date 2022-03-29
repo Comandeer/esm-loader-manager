@@ -1,14 +1,17 @@
 import { resolve as resolvePath } from 'path';
 import { existsSync as fileExists } from 'fs';
-import { createModuleURL } from './utilities.js';
+import { createModuleURL, resolveConfigFile } from './utilities.js';
+import { resolveProjectRoot } from './utilities.js';
 import { loadURL } from './utilities.js';
 
 const cwd = process.cwd();
-const loaderFileName = 'ESMLM_CONFIG' in process.env ? process.env.ESMLM_CONFIG : '.esmlmrc.js';
-const loaderPath = resolvePath( cwd, loaderFileName );
+const projectRoot = await resolveProjectRoot( cwd );
+const loaderFileName = 'ESMLM_CONFIG' in process.env ? process.env.ESMLM_CONFIG :
+	await resolveConfigFile( cwd, projectRoot );
+const loaderPath = loaderFileName ? resolvePath( cwd, loaderFileName ) : null;
 let loaders = [];
 
-if ( fileExists( loaderPath ) ) {
+if ( loaderPath && fileExists( loaderPath ) ) {
 	const { default: config } = await import( loaderPath );
 
 	loaders = config.loaders;

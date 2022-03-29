@@ -14,7 +14,8 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
 
 /**
  * @typedef {Object} LoaderTestOptions
- * @property {string} fixturePath Path to the fixture.
+ * @property {string} fixturePath Path to the fixture directory.
+ * @property {string} [entryPoint=fixturePath] The file name to be exectued by Node.
  * @property {Record<string, string>} [env={}] Additional environment variables to pass to the command.
  * @property {LoaderTestCallback} callback Callback to invoke after executing command.
  */
@@ -25,6 +26,7 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
  */
 function createLoaderTest( {
 	fixturePath,
+	entryPoint = fixturePath,
 	env = {},
 	callback: userCallback
 } = {} ) {
@@ -33,7 +35,7 @@ function createLoaderTest( {
 	const params = [
 		'--experimental-loader',
 		loaderPath,
-		fixturePath
+		entryPoint
 	];
 	return createCmdTest( {
 		cmd,
