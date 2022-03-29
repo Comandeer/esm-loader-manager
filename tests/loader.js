@@ -8,7 +8,7 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
 const fixtureDirPath = resolvePath( __dirname, '__fixtures__' );
 const simpleLoaderFixturePath = resolvePath( fixtureDirPath, 'simpleLoader' );
 const withoutLoaderFileFixturePath = resolvePath( fixtureDirPath, 'projectWithoutLoaderFile' );
-const multipleConfigFilesFixturePath = resolvePath( fixtureDirPath, 'multipleConfigFiles' );
+const customConfigFileFixturePath = resolvePath( fixtureDirPath, 'customConfigFile' );
 
 test( 'loader raises an error if loaders\' definitions are not found', createLoaderTest( {
 	fixturePath: withoutLoaderFileFixturePath,
@@ -27,7 +27,7 @@ test( 'loader correctly uses user-provided loader', createLoaderTest( {
 } ) );
 
 test( 'path to the file can be passed as environment variable (relative one)', createLoaderTest( {
-	fixturePath: multipleConfigFilesFixturePath,
+	fixturePath: customConfigFileFixturePath,
 	env: {
 		ESMLM_CONFIG: './customConfig.mjs'
 	},
@@ -37,9 +37,9 @@ test( 'path to the file can be passed as environment variable (relative one)', c
 } ) );
 
 test( 'path to the file can be passed as environment variable (absolute one)', createLoaderTest( {
-	fixturePath: multipleConfigFilesFixturePath,
+	fixturePath: customConfigFileFixturePath,
 	env: {
-		ESMLM_CONFIG: resolvePath( multipleConfigFilesFixturePath, 'customConfig.mjs' )
+		ESMLM_CONFIG: resolvePath( customConfigFileFixturePath, 'customConfig.mjs' )
 	},
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
