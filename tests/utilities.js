@@ -19,6 +19,7 @@ const nestedLoaderLevel2DirPath = resolvePath( nestedLoaderLevel1DirPath, 'level
 const nestedLoaderLevel3DirPath = resolvePath( nestedLoaderLevel2DirPath, 'level3' );
 const moduleConfigFileDirPath = resolvePath( fixtureDirPath, 'moduleConfigFile' );
 const multipleConfigFilesDirPath = resolvePath( fixtureDirPath, 'multipleConfigFiles' );
+const projectWithoutLoaderFileDirPath = resolvePath( fixtureDirPath, 'projectWithoutLoaderFile' );
 
 test( 'createModuleURL() creates URL from the given specifier', ( t ) => {
 	const specifier = './test.js';
@@ -81,6 +82,14 @@ test( 'resolveConfigFile() points to the nearest .esmlmrc.mjs file', async ( t )
 test( 'resolveConfigFile() prefers .esmlmrc.js over .esmlmrc.mjs', async ( t ) => {
 	const expectedConfigFilePath = resolvePath( multipleConfigFilesDirPath, configFileName );
 	const resolvedConfigFilePath = await resolveConfigFile( multipleConfigFilesDirPath, multipleConfigFilesDirPath );
+
+	t.is( resolvedConfigFilePath, expectedConfigFilePath );
+} );
+
+test( 'resolveConfigFile() returns null if the config file is not found in the project', async ( t ) => {
+	const expectedConfigFilePath = null;
+	const resolvedConfigFilePath = await resolveConfigFile( projectWithoutLoaderFileDirPath,
+		projectWithoutLoaderFileDirPath );
 
 	t.is( resolvedConfigFilePath, expectedConfigFilePath );
 } );
