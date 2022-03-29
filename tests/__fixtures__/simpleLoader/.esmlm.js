@@ -1,10 +1,12 @@
-export default [
-	{
-		matcher( url ) {
-			return url.endsWith( 'module.js' );
-		},
-		loader() {
-			return 'export default "hublabubla";'
+export default {
+	loaders: [
+		{
+			matcher( url ) {
+				return url.endsWith( 'module.js' );
+			},
+			loader() {
+				return 'export default "hublabubla";'
+			}
 		}
-	}
-];
+	]
+};

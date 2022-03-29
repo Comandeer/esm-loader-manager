@@ -9,9 +9,9 @@ const loaderPath = resolvePath( cwd, loaderFileName );
 let loaders = [];
 
 if ( fileExists( loaderPath ) ) {
-	const { default: loadedLoaders } = await import( loaderPath );
+	const { default: config } = await import( loaderPath );
 
-	loaders = loadedLoaders;
+	loaders = config.loaders;
 } else {
 	console.warn( 'ESMLM: The file with loaders\' definition was not found.' ); // eslint-disable-line no-console
 }
