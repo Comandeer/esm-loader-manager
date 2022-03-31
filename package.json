@@ -69,6 +69,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.10.0",
     "execa": "^6.1.0",
-    "husky": "^7.0.4"
+    "husky": "^7.0.4",
+    "mock-fs": "^5.1.2"
   }
 }
