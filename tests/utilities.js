@@ -3,6 +3,7 @@ import { pathToFileURL } from 'url';
 import { dirname } from 'path';
 import { resolve as resolvePath } from 'path';
 import test from 'ava';
+import mockFS from 'mock-fs';
 import { createModuleURL, resolveConfigFile } from '../src/utilities.js';
 import { loadURL } from '../src/utilities.js';
 import { resolveProjectRoot } from '../src/utilities.js';
@@ -20,6 +21,18 @@ const nestedLoaderLevel3DirPath = resolvePath( nestedLoaderLevel2DirPath, 'level
 const moduleConfigFileDirPath = resolvePath( fixtureDirPath, 'moduleConfigFile' );
 const multipleConfigFilesDirPath = resolvePath( fixtureDirPath, 'multipleConfigFiles' );
 const projectWithoutLoaderFileDirPath = resolvePath( fixtureDirPath, 'projectWithoutLoaderFile' );
+const emptyDirPath = '/testDir/with/nested';
+
+test.before( () => {
+	mockFS( {
+		[ fixtureDirPath ]: mockFS.load( fixtureDirPath ),
+		[ emptyDirPath ]: {}
+	} );
+} );
+
+test.after( () => {
+	mockFS.restore();
+} );
 
 test( 'createModuleURL() creates URL from the given specifier', ( t ) => {
 	const specifier = './test.js';
@@ -49,6 +62,12 @@ test( 'resolveProjectRoot() points to the directory with the nearest package.jso
 	const resolvedProjectRoot = await resolveProjectRoot( nestedLoaderLevel3DirPath );
 
 	t.is( resolvedProjectRoot, nestedLoaderDirPath );
+} );
+
+test( 'resolveProjectRoot() returns null if reaches / without finding package.json file', async ( t ) => {
+	const resolvedProjectRoot = await resolveProjectRoot( emptyDirPath );
+
+	t.is( resolvedProjectRoot, null );
 } );
 
 test( 'resolveConfigFile() points to the nearest .esmlmrc.js file (same dir)', async ( t ) => {
