@@ -14,6 +14,8 @@ const nestedLoaderFixturePath = resolvePath( fixtureDirPath, 'nested' );
 const nestedLoaderLevel1DirPath = resolvePath( nestedLoaderFixturePath, 'level1' );
 const nestedLoaderLevel2DirPath = resolvePath( nestedLoaderLevel1DirPath, 'level2' );
 const nestedLoaderLevel3DirPath = resolvePath( nestedLoaderLevel2DirPath, 'level3' );
+const outsideProjectRootFixturePath = resolvePath( fixtureDirPath, 'outsideProjectRoot' );
+const nestedProjectRootDirPath = resolvePath( outsideProjectRootFixturePath, 'projectRoot' );
 
 test( 'loader raises an error if loaders\' definitions are not found', createLoaderTest( {
 	fixturePath: withoutLoaderFileFixturePath,
@@ -71,5 +73,12 @@ test( 'deeply nested module uses correct config file', createLoaderTest( {
 	entryPoint: 'superDeeplyNested.js',
 	callback( t, { stdout } ) {
 		t.is( stdout, 'nested' );
+	}
+} ) );
+
+test( 'loader ignores modules loaded from the outside of project root', createLoaderTest( {
+	fixturePath: nestedProjectRootDirPath,
+	callback( t, { stdout } ) {
+		t.is( stdout, 'false' );
 	}
 } ) );
