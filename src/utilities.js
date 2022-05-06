@@ -66,7 +66,8 @@ async function resolveConfigFile( startDir, projectRoot ) {
 }
 
 function isInsideDir( dir, path ) {
-	const relativePath = getRelativePath( dir, path );
+	const filePath = path.startsWith( 'file://' ) ? fileURLToPath( path ) : path;
+	const relativePath = getRelativePath( dir, filePath );
 
 	// https://www.golinuxcloud.com/if-path-is-subdirectory-of-another-nodejs/
 	return !relativePath.startsWith( '..' );

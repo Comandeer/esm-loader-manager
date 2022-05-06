@@ -148,3 +148,35 @@ test( 'isInsideDir() returns false for a file inside the directory that is a sib
 	t.false( result );
 } );
 
+test( 'isInsideDir() returns true for a file URL inside the provided root path', ( t ) => {
+	const rootPath = '/some/dummy/path';
+	const moduleURL = `file://${ rootPath }/index.js`;
+	const result = isInsideDir( rootPath, moduleURL );
+
+	t.true( result );
+} );
+
+test( 'isInsideDir() returns true for a file URL inside the deeply nested subdirectory inside the root path', ( t ) => {
+	const rootPath = '/some/dummy/path';
+	const moduleURL = `file://${ rootPath }/with/deeply/nested/sub/directory/index.js`;
+	const result = isInsideDir( rootPath, moduleURL );
+
+	t.true( result );
+} );
+
+test( 'isInsideDir() returns false for a file URL inside the directory that is outside the root path', ( t ) => {
+	const rootPath = '/some/dummy/path';
+	const moduleURL = '/totally/different/dir/index.js';
+	const result = isInsideDir( rootPath, moduleURL );
+
+	t.false( result );
+} );
+
+test( 'isInsideDir() returns false for a file URL inside the directory that is a sibling to the root path', ( t ) => {
+	const commonRoot = '/some';
+	const rootPath = `${ commonRoot }/dummy`;
+	const modulePath = `file://${ commonRoot }/index.js`;
+	const result = isInsideDir( rootPath, modulePath );
+
+	t.false( result );
+} );
