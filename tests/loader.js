@@ -17,6 +17,7 @@ const nestedLoaderLevel3DirPath = resolvePath( nestedLoaderLevel2DirPath, 'level
 const outsideProjectRootFixturePath = resolvePath( fixtureDirPath, 'outsideProjectRoot' );
 const nestedProjectRootDirPath = resolvePath( outsideProjectRootFixturePath, 'projectRoot' );
 const resolvingURLsFixturePath = resolvePath( fixtureDirPath, 'resolvingURLs' );
+const loaderArgsFixturePath = resolvePath( fixtureDirPath, 'loaderArgs' );
 
 test( 'loader raises an error if loaders\' definitions are not found', createLoaderTest( {
 	fixturePath: withoutLoaderFileFixturePath,
@@ -86,6 +87,13 @@ test( 'loader ignores modules loaded from the outside of project root', createLo
 
 test( 'both resolver and loader are matched against module URL', createLoaderTest( {
 	fixturePath: resolvingURLsFixturePath,
+	callback( t, { stdout } ) {
+		t.is( stdout, 'true' );
+	}
+} ) );
+
+test( 'loader() receives correct arguments', createLoaderTest( {
+	fixturePath: loaderArgsFixturePath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
 	}
