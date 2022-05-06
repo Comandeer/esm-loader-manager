@@ -2,12 +2,12 @@ export default {
 	loaders: [
 		{
 			matcher( url ) {
-				const extensionRegex = /\.m?js$/;
+				const extensionRegex = /\.mjs$/;
 
 				return extensionRegex.test( url );
 			},
 			loader() {
-				return 'export default "hublabubla";'
+				return 'export default true;'
 			}
 		}
 	]
