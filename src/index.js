@@ -32,13 +32,13 @@ async function resolve( specifier, context, defaultResolve ) {
 		return matcher( specifier, context );
 	} );
 
-	if ( isAnyLoaderForSpecifier ) {
-		return {
-			url: moduleURL
-		};
+	if ( !isAnyLoaderForSpecifier ) {
+		return defaultResolve( specifier, context, defaultResolve );
 	}
 
-	return defaultResolve( specifier, context, defaultResolve );
+	return {
+		url: moduleURL
+	};
 }
 
 async function load( url, context, defaultLoad ) {
