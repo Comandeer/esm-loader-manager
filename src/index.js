@@ -29,7 +29,7 @@ async function resolve( specifier, context, defaultResolve ) {
 	}
 
 	const isAnyLoaderForSpecifier = loaders.some( ( { matcher } ) => {
-		return matcher( specifier, context );
+		return matcher( moduleURL, context );
 	} );
 
 	if ( !isAnyLoaderForSpecifier ) {
