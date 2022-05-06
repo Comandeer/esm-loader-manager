@@ -1,6 +1,8 @@
 import { resolve as resolvePath } from 'path';
 import { existsSync as fileExists } from 'fs';
-import { createModuleURL, resolveConfigFile } from './utilities.js';
+import { createModuleURL } from './utilities.js';
+import { isInsideDir } from './utilities.js';
+import { resolveConfigFile } from './utilities.js';
 import { resolveProjectRoot } from './utilities.js';
 import { loadURL } from './utilities.js';
 
@@ -20,13 +22,17 @@ if ( loaderPath && fileExists( loaderPath ) ) {
 }
 
 async function resolve( specifier, context, defaultResolve ) {
+	const moduleURL = createModuleURL( specifier, context );
+
+	if ( !isInsideDir( projectRoot, moduleURL ) ) {
+		return defaultResolve( specifier, context, defaultResolve );
+	}
+
 	const isAnyLoaderForSpecifier = loaders.some( ( { matcher } ) => {
 		return matcher( specifier, context );
 	} );
 
 	if ( isAnyLoaderForSpecifier ) {
-		const moduleURL = createModuleURL( specifier, context );
-
 		return {
 			url: moduleURL
 		};
@@ -36,6 +42,10 @@ async function resolve( specifier, context, defaultResolve ) {
 }
 
 async function load( url, context, defaultLoad ) {
+	if ( !isInsideDir( projectRoot, url ) ) {
+		return defaultLoad( url, context, defaultLoad );
+	}
+
 	const matchedLoaders = loaders.filter( ( { matcher } ) => {
 		return matcher( url, context );
 	} );
