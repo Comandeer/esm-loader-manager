@@ -4,7 +4,9 @@ import { dirname } from 'path';
 import { resolve as resolvePath } from 'path';
 import test from 'ava';
 import mockFS from 'mock-fs';
-import { createModuleURL, resolveConfigFile } from '../src/utilities.js';
+import { createModuleURL } from '../src/utilities.js';
+import { isInsideDir } from '../src/utilities.js';
+import { resolveConfigFile } from '../src/utilities.js';
 import { loadURL } from '../src/utilities.js';
 import { resolveProjectRoot } from '../src/utilities.js';
 
@@ -112,3 +114,37 @@ test( 'resolveConfigFile() returns null if the config file is not found in the p
 
 	t.is( resolvedConfigFilePath, expectedConfigFilePath );
 } );
+
+test( 'isInsideDir() returns true for a file inside the provided root path', ( t ) => {
+	const rootPath = '/some/dummy/path';
+	const modulePath = `${ rootPath }/index.js`;
+	const result = isInsideDir( rootPath, modulePath );
+
+	t.true( result );
+} );
+
+test( 'isInsideDir() returns true for a file inside the deeply nested subdirectory inside the root path', ( t ) => {
+	const rootPath = '/some/dummy/path';
+	const modulePath = `${ rootPath }/with/deeply/nested/sub/directory/index.js`;
+	const result = isInsideDir( rootPath, modulePath );
+
+	t.true( result );
+} );
+
+test( 'isInsideDir() returns false for a file inside the directory that is outside the root path', ( t ) => {
+	const rootPath = '/some/dummy/path';
+	const modulePath = '/totally/different/dir/index.js';
+	const result = isInsideDir( rootPath, modulePath );
+
+	t.false( result );
+} );
+
+test( 'isInsideDir() returns false for a file inside the directory that is a sibling to the root path', ( t ) => {
+	const commonRoot = '/some';
+	const rootPath = `${ commonRoot }/dummy`;
+	const modulePath = `${ commonRoot }/index.js`;
+	const result = isInsideDir( rootPath, modulePath );
+
+	t.false( result );
+} );
+

@@ -1,4 +1,5 @@
 import { resolve as resolvePath } from 'path';
+import { relative as getRelativePath } from 'path';
 import { fileURLToPath } from 'url';
 import { readdir } from 'fs/promises';
 import { readFile } from 'fs/promises';
@@ -64,7 +65,15 @@ async function resolveConfigFile( startDir, projectRoot ) {
 	return resolveConfigFile( dirUp );
 }
 
+function isInsideDir( dir, path ) {
+	const relativePath = getRelativePath( dir, path );
+
+	// https://www.golinuxcloud.com/if-path-is-subdirectory-of-another-nodejs/
+	return !relativePath.startsWith( '..' );
+}
+
 export { createModuleURL };
 export { loadURL };
 export { resolveProjectRoot };
 export { resolveConfigFile };
+export { isInsideDir };
