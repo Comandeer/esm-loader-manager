@@ -37,6 +37,7 @@ function createLoaderTest( {
 		loaderPath,
 		entryPoint
 	];
+
 	return createCmdTest( {
 		cmd,
 		params,

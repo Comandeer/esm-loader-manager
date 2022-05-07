@@ -1,4 +1,9 @@
+import { cp } from 'fs/promises';
+import { mkdtemp } from 'fs/promises';
+import { rm } from 'fs/promises';
+import { tmpdir } from 'os';
 import { dirname } from 'path';
+import { join as joinPath } from 'path';
 import { resolve as resolvePath } from 'path';
 import { fileURLToPath } from 'url';
 import test from 'ava';
@@ -18,6 +23,28 @@ const outsideProjectRootFixturePath = resolvePath( fixtureDirPath, 'outsideProje
 const nestedProjectRootDirPath = resolvePath( outsideProjectRootFixturePath, 'projectRoot' );
 const resolvingURLsFixturePath = resolvePath( fixtureDirPath, 'resolvingURLs' );
 const loaderArgsFixturePath = resolvePath( fixtureDirPath, 'loaderArgs' );
+let tempDirPath;
+let noProjectRootFixturePath;
+
+test.before( async () => {
+	const tempDirPrefix = joinPath( tmpdir(), 'esmlm' );
+	tempDirPath = await mkdtemp( tempDirPrefix );
+	const noProjectRootFixtureTemplatePath = resolvePath( fixtureDirPath, 'noProjectRoot' );
+	const noProjectRootDirPath = resolvePath( tempDirPath, 'noProjectRoot', 'cwd' );
+
+	await cp( noProjectRootFixtureTemplatePath, noProjectRootDirPath, {
+		recursive: true
+	} );
+
+	noProjectRootFixturePath = resolvePath( noProjectRootDirPath, 'cwd' );
+} );
+
+test.after.always( async () => {
+	await rm( tempDirPath, {
+		recursive: true,
+		force: true
+	} );
+} );
 
 test( 'loader raises an error if loaders\' definitions are not found', createLoaderTest( {
 	fixturePath: withoutLoaderFileFixturePath,
@@ -98,3 +125,18 @@ test( 'loader() receives correct arguments', createLoaderTest( {
 		t.is( stdout, 'true' );
 	}
 } ) );
+
+test( 'loader without a project root restricts itself to CWD', ( t ) => {
+	const test = createLoaderTest( {
+		fixturePath: noProjectRootFixturePath,
+		entryPoint: 'index.mjs',
+		callback( t, { stdout, stderr } ) {
+			const projectRootNotDetectedError = 'ESMLM: The project root was not detected. Falling back to the CWD.';
+
+			t.is( stdout, 'true\ntrue\nfalse' );
+			t.true( stderr.includes( projectRootNotDetectedError ) );
+		}
+	} );
+
+	return test( t );
+} );
