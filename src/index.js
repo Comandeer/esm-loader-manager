@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { resolve as resolvePath } from 'path';
 import { existsSync as fileExists } from 'fs';
 import { createModuleURL } from './utilities.js';
@@ -7,7 +9,13 @@ import { resolveProjectRoot } from './utilities.js';
 import { loadURL } from './utilities.js';
 
 const cwd = process.cwd();
-const projectRoot = await resolveProjectRoot( cwd );
+const resolvedProjectRoot = await resolveProjectRoot( cwd );
+
+if ( !resolvedProjectRoot ) {
+	console.warn( 'ESMLM: The project root was not detected. Falling back to the CWD.' );
+}
+
+const projectRoot = resolvedProjectRoot || cwd;
 const loaderFileName = 'ESMLM_CONFIG' in process.env ? process.env.ESMLM_CONFIG :
 	await resolveConfigFile( cwd, projectRoot );
 const loaderPath = loaderFileName ? resolvePath( cwd, loaderFileName ) : null;
@@ -18,7 +26,7 @@ if ( loaderPath && fileExists( loaderPath ) ) {
 
 	loaders = config.loaders;
 } else {
-	console.warn( 'ESMLM: The file with loaders\' definition was not found.' ); // eslint-disable-line no-console
+	console.warn( 'ESMLM: The file with loaders\' definition was not found.' );
 }
 
 async function resolve( specifier, context, defaultResolve ) {
