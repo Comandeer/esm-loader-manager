@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@comandeer/eslint-config": "^0.8.0",
-    "@comandeer/rollup-lib-bundler": "^0.15.1",
+    "@comandeer/rollup-lib-bundler": "^0.16.0",
     "ava": "^4.2.0",
     "c8": "^7.11.2",
     "commitplease": "^3.2.0",
