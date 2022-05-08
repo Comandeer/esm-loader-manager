@@ -73,8 +73,15 @@ function isInsideDir( dir, path ) {
 	return !relativePath.startsWith( '..' );
 }
 
+function isInsideNodeModules( pathOrURL ) {
+	const npmModulesPathRegex = /[/\\]node_modules[/\\]/gi;
+
+	return npmModulesPathRegex.test( pathOrURL );
+}
+
 export { createModuleURL };
 export { loadURL };
 export { resolveProjectRoot };
 export { resolveConfigFile };
 export { isInsideDir };
+export { isInsideNodeModules };

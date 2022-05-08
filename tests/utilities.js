@@ -6,6 +6,7 @@ import test from 'ava';
 import mockFS from 'mock-fs';
 import { createModuleURL } from '../src/utilities.js';
 import { isInsideDir } from '../src/utilities.js';
+import { isInsideNodeModules } from '../src/utilities.js';
 import { resolveConfigFile } from '../src/utilities.js';
 import { loadURL } from '../src/utilities.js';
 import { resolveProjectRoot } from '../src/utilities.js';
@@ -177,6 +178,34 @@ test( 'isInsideDir() returns false for a file URL inside the directory that is a
 	const rootPath = `${ commonRoot }/dummy`;
 	const modulePath = `file://${ commonRoot }/index.js`;
 	const result = isInsideDir( rootPath, modulePath );
+
+	t.false( result );
+} );
+
+test( 'isInsideNodeModules() returns true for a path that is inside the node_modules directory', ( t ) => {
+	const path = '/whatever/node_modules/test.mjs';
+	const result = isInsideNodeModules( path );
+
+	t.true( result );
+} );
+
+test( 'isInsideNodeModules() returns true for a URL that is inside the node_modules directory', ( t ) => {
+	const url = 'file:///whatever/node_modules/test.mjs';
+	const result = isInsideNodeModules( url );
+
+	t.true( result );
+} );
+
+test( 'isInsideNodeModules() returns false for a path that is not inside the node_modules directory', ( t ) => {
+	const path = '/whatever/test.mjs';
+	const result = isInsideNodeModules( path );
+
+	t.false( result );
+} );
+
+test( 'isInsideNodeModules() returns false for a URL that is not inside the node_modules directory', ( t ) => {
+	const url = 'file:///whatever/test.mjs';
+	const result = isInsideNodeModules( url );
 
 	t.false( result );
 } );
