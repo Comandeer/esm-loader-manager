@@ -23,6 +23,7 @@ const outsideProjectRootFixturePath = resolvePath( fixtureDirPath, 'outsideProje
 const nestedProjectRootDirPath = resolvePath( outsideProjectRootFixturePath, 'projectRoot' );
 const resolvingURLsFixturePath = resolvePath( fixtureDirPath, 'resolvingURLs' );
 const loaderArgsFixturePath = resolvePath( fixtureDirPath, 'loaderArgs' );
+const npmImportsFixturePath = resolvePath( fixtureDirPath, 'npmImports' );
 let tempDirPath;
 let noProjectRootFixturePath;
 
@@ -140,3 +141,10 @@ test( 'loader without a project root restricts itself to CWD', ( t ) => {
 
 	return test( t );
 } );
+
+test( 'modules inside node_modules are ignored', createLoaderTest( {
+	fixturePath: npmImportsFixturePath,
+	callback( t, { stdout } ) {
+		t.is( stdout, 'false\nfalse' );
+	}
+} ) );

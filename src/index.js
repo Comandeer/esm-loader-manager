@@ -2,8 +2,8 @@
 
 import { resolve as resolvePath } from 'path';
 import { existsSync as fileExists } from 'fs';
-import { createModuleURL } from './utilities.js';
 import { isInsideDir } from './utilities.js';
+import { isInsideNodeModules } from './utilities.js';
 import { resolveConfigFile } from './utilities.js';
 import { resolveProjectRoot } from './utilities.js';
 import { loadURL } from './utilities.js';
@@ -30,10 +30,11 @@ if ( loaderPath && fileExists( loaderPath ) ) {
 }
 
 async function resolve( specifier, context, defaultResolve ) {
-	const moduleURL = createModuleURL( specifier, context );
+	const defaultResolvedInfo = await defaultResolve( specifier, context, defaultResolve );
+	const { url: moduleURL } = defaultResolvedInfo;
 
-	if ( !isInsideDir( projectRoot, moduleURL ) ) {
-		return defaultResolve( specifier, context, defaultResolve );
+	if ( !isInsideDir( projectRoot, moduleURL ) || isInsideNodeModules( moduleURL ) ) {
+		return defaultResolvedInfo;
 	}
 
 	const isAnyLoaderForSpecifier = loaders.some( ( { matcher } ) => {
@@ -41,16 +42,17 @@ async function resolve( specifier, context, defaultResolve ) {
 	} );
 
 	if ( !isAnyLoaderForSpecifier ) {
-		return defaultResolve( specifier, context, defaultResolve );
+		return defaultResolvedInfo;
 	}
 
 	return {
-		url: moduleURL
+		url: moduleURL,
+		type: 'module'
 	};
 }
 
 async function load( url, context, defaultLoad ) {
-	if ( !isInsideDir( projectRoot, url ) ) {
+	if ( !isInsideDir( projectRoot, url ) || isInsideNodeModules( url ) ) {
 		return defaultLoad( url, context, defaultLoad );
 	}
 
