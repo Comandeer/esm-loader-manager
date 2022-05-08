@@ -4,7 +4,6 @@ import { dirname } from 'path';
 import { resolve as resolvePath } from 'path';
 import test from 'ava';
 import mockFS from 'mock-fs';
-import { createModuleURL } from '../src/utilities.js';
 import { isInsideDir } from '../src/utilities.js';
 import { isInsideNodeModules } from '../src/utilities.js';
 import { resolveConfigFile } from '../src/utilities.js';
@@ -35,16 +34,6 @@ test.before( () => {
 
 test.after( () => {
 	mockFS.restore();
-} );
-
-test( 'createModuleURL() creates URL from the given specifier', ( t ) => {
-	const specifier = './test.js';
-	const expectedURL = new URL( specifier, import.meta.url ).href;
-	const url = createModuleURL( specifier, {
-		parentURL: import.meta.url
-	} );
-
-	t.deepEqual( url, expectedURL );
 } );
 
 test( 'loadURL() loads given file as a buffer', async ( t ) => {
