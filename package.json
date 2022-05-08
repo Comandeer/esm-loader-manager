@@ -9,6 +9,9 @@
   },
   "main": "dist/esm-loader-manager.cjs",
   "types": "esm-loader-manager.d.ts",
+  "bin": {
+    "esmlm": "bin/esmlm.js"
+  },
   "files": [
     "dist"
   ],
