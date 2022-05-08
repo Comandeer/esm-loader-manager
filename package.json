@@ -4,10 +4,8 @@
   "description": "Allows to use several ESM loaders in one Node.js application.",
   "type": "module",
   "exports": {
-    "node": "./dist/esm-loader-manager.cjs",
     "import": "./dist/esm-loader-manager.mjs"
   },
-  "main": "dist/esm-loader-manager.cjs",
   "types": "esm-loader-manager.d.ts",
   "bin": {
     "esmlm": "bin/esmlm.js"
