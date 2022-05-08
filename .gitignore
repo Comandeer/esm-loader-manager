@@ -1,4 +1,5 @@
 node_modules/
+!tests/__fixtures__/**/node_modules/
 *.*~
 *.db
 .goutputstream-*
