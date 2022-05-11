@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { argv } from 'process';
+import { argv, exit } from 'process';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { resolve as resolvePath } from 'path';
@@ -18,7 +18,9 @@ const params = [
 	entryPoint
 ];
 
-execa( cmd, params, {
+const { exitCode } = await execa( cmd, params, {
 	cwd,
 	stdio: 'inherit'
 } );
+
+exit( exitCode );
