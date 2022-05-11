@@ -9,7 +9,7 @@ const fixtureDirPath = resolvePath( __dirname, '__fixtures__' );
 const esmlmFixturePath = resolvePath( fixtureDirPath, 'esmlm' );
 
 test( 'esmlm correctly launches Node.js module without any parameters and with set CWD', createEsmlmTest( {
-	fixturePath: esmlmFixturePath,
+	cwd: esmlmFixturePath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
 	}
