@@ -8,7 +8,7 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
 /**
  * @callback EsmlmTestCallback
  * @param {import('ava').ExecutionContext<unknown>} t Test execution context
- * @param {ChildProcessResult} results
+ * @param {import('execa').ExecaReturnValue} results
  * @returns {void}
  */
 
