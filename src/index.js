@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 
-import { resolve as resolvePath } from 'path';
-import { existsSync as fileExists } from 'fs';
+import { resolve as resolvePath } from 'node:path';
+import { existsSync as fileExists } from 'node:fs';
+import { cwd as processCWD } from 'node:process';
+import { env as processEnv } from 'node:process';
 import { isBuiltInModule } from './utilities.js';
 import { isInsideDir } from './utilities.js';
 import { isInsideNodeModules } from './utilities.js';
@@ -9,7 +11,7 @@ import { resolveConfigFile } from './utilities.js';
 import { resolveProjectRoot } from './utilities.js';
 import { loadURL } from './utilities.js';
 
-const cwd = process.cwd();
+const cwd = processCWD();
 const resolvedProjectRoot = await resolveProjectRoot( cwd );
 
 if ( !resolvedProjectRoot ) {
@@ -17,7 +19,7 @@ if ( !resolvedProjectRoot ) {
 }
 
 const projectRoot = resolvedProjectRoot || cwd;
-const loaderFileName = 'ESMLM_CONFIG' in process.env ? process.env.ESMLM_CONFIG :
+const loaderFileName = 'ESMLM_CONFIG' in processEnv ? processEnv.ESMLM_CONFIG :
 	await resolveConfigFile( cwd, projectRoot );
 const loaderPath = loaderFileName ? resolvePath( cwd, loaderFileName ) : null;
 let loaders = [];

@@ -1,11 +1,11 @@
-import { cp } from 'fs/promises';
-import { mkdtemp } from 'fs/promises';
-import { rm } from 'fs/promises';
-import { tmpdir } from 'os';
-import { dirname } from 'path';
-import { join as joinPath } from 'path';
-import { resolve as resolvePath } from 'path';
-import { fileURLToPath } from 'url';
+import { cp } from 'node:fs/promises';
+import { mkdtemp } from 'node:fs/promises';
+import { rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { dirname } from 'node:path';
+import { join as joinPath } from 'node:path';
+import { resolve as resolvePath } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'ava';
 import createLoaderTest from './__helpers__/createLoaderTest.js';
 

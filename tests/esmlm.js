@@ -1,6 +1,6 @@
-import { dirname } from 'path';
-import { resolve as resolvePath } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname } from 'node:path';
+import { resolve as resolvePath } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'ava';
 import createEsmlmTest from './__helpers__/createEsmlmTest.js';
 

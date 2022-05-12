@@ -1,3 +1,4 @@
+import { cwd as processCWD } from 'node:process';
 import { execa } from 'execa';
 
 /**
@@ -25,7 +26,7 @@ function createCmdTest( {
 	callback,
 	params = [],
 	env = {},
-	cwd = process.cwd()
+	cwd = processCWD()
 } = {} ) {
 	return async ( t ) => {
 		let result;
