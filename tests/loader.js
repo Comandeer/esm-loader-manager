@@ -24,6 +24,7 @@ const nestedProjectRootDirPath = resolvePath( outsideProjectRootFixturePath, 'pr
 const resolvingURLsFixturePath = resolvePath( fixtureDirPath, 'resolvingURLs' );
 const loaderArgsFixturePath = resolvePath( fixtureDirPath, 'loaderArgs' );
 const npmImportsFixturePath = resolvePath( fixtureDirPath, 'npmImports' );
+const builinModulesFixturePath = resolvePath( fixtureDirPath, 'builtinModules' );
 let tempDirPath;
 let noProjectRootFixturePath;
 
@@ -146,5 +147,12 @@ test( 'modules inside node_modules are ignored', createLoaderTest( {
 	fixturePath: npmImportsFixturePath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'false\nfalse' );
+	}
+} ) );
+
+test( 'built-in modules are ignored', createLoaderTest( {
+	fixturePath: builinModulesFixturePath,
+	callback( t, { stdout } ) {
+		t.not( stdout, 'true\ntrue\ntrue' );
 	}
 } ) );
