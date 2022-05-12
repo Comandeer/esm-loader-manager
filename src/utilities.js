@@ -71,8 +71,17 @@ function isInsideNodeModules( pathOrURL ) {
 	return npmModulesPathRegex.test( pathOrURL );
 }
 
+function isBuiltInModule( { url, format } ) {
+	if ( format ) {
+		return format === 'builtin';
+	}
+
+	return url.startsWith( 'node:' );
+}
+
 export { loadURL };
 export { resolveProjectRoot };
 export { resolveConfigFile };
 export { isInsideDir };
 export { isInsideNodeModules };
+export { isBuiltInModule };
