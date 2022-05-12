@@ -26,7 +26,7 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
  */
 function createEsmlmTest( {
 	cwd,
-	entryPoint = cwd,
+	entryPoint,
 	env = {},
 	callback: userCallback
 } = {} ) {
@@ -35,10 +35,6 @@ function createEsmlmTest( {
 	const params = entryPoint ? [
 		entryPoint
 	] : [];
-
-	// Do not propagate coverage into esmlm binary.
-	// For some reason it breaks the coverage calculation.
-	env.NODE_V8_COVERAGE = '';
 
 	return createCmdTest( {
 		cmd,
