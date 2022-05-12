@@ -36,6 +36,10 @@ function createEsmlmTest( {
 		entryPoint
 	] : [];
 
+	// Do not propagate coverage into esmlm binary.
+	// For some reason it breaks the coverage calculation.
+	env.NODE_V8_COVERAGE = '';
+
 	return createCmdTest( {
 		cmd,
 		params,
