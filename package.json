@@ -11,7 +11,9 @@
     "esmlm": "bin/esmlm.js"
   },
   "files": [
-    "dist"
+    "bin",
+    "dist",
+    "esm-loader-manager.d.ts"
   ],
   "engines": {
     "node": ">=16.7.0"
