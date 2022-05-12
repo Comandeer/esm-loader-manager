@@ -2,6 +2,7 @@
 
 import { resolve as resolvePath } from 'path';
 import { existsSync as fileExists } from 'fs';
+import { isBuiltInModule } from './utilities.js';
 import { isInsideDir } from './utilities.js';
 import { isInsideNodeModules } from './utilities.js';
 import { resolveConfigFile } from './utilities.js';
@@ -33,7 +34,7 @@ async function resolve( specifier, context, defaultResolve ) {
 	const defaultResolvedInfo = await defaultResolve( specifier, context, defaultResolve );
 	const { url: moduleURL } = defaultResolvedInfo;
 
-	if ( !isInsideDir( projectRoot, moduleURL ) || isInsideNodeModules( moduleURL ) ) {
+	if ( shouldIgnoreModule( projectRoot, defaultResolvedInfo ) ) {
 		return defaultResolvedInfo;
 	}
 
@@ -52,7 +53,9 @@ async function resolve( specifier, context, defaultResolve ) {
 }
 
 async function load( url, context, defaultLoad ) {
-	if ( !isInsideDir( projectRoot, url ) || isInsideNodeModules( url ) ) {
+	const moduleInfo = { ...context, url };
+
+	if ( shouldIgnoreModule( projectRoot, moduleInfo ) ) {
 		return defaultLoad( url, context, defaultLoad );
 	}
 
@@ -74,6 +77,12 @@ async function load( url, context, defaultLoad ) {
 		format: 'module',
 		source
 	};
+}
+
+function shouldIgnoreModule( projectRoot, moduleInfo ) {
+	const moduleURL = moduleInfo.url;
+
+	return isBuiltInModule( moduleInfo ) || isInsideNodeModules( moduleURL ) || !isInsideDir( projectRoot, moduleURL );
 }
 
 export { resolve };
