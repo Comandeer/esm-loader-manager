@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { pathToFileURL } from 'node:url';
 import { dirname } from 'node:path';
@@ -42,7 +43,7 @@ test.after( () => {
 
 test( 'loadURL() loads given file as a buffer', async ( t ) => {
 	const fileURL = pathToFileURL( dummyPath );
-	const expectedFileContent = Buffer.from( `hublabubla${ EOL }` );
+	const expectedFileContent = await readFile( dummyPath );
 	const fileContent = await loadURL( fileURL );
 
 	t.deepEqual( fileContent, expectedFileContent );
