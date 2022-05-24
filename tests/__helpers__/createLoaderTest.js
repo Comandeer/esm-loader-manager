@@ -1,6 +1,6 @@
 import { dirname } from 'node:path';
 import { resolve as resolvePath } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import createCmdTest from './createCmdTest.js';
 
 const __dirname = dirname( fileURLToPath( import.meta.url ) );
@@ -31,10 +31,11 @@ function createLoaderTest( {
 	callback: userCallback
 } = {} ) {
 	const loaderPath = resolvePath( __dirname, '..', '..', 'src', 'index.js' );
+	const loaderURL = pathToFileURL( loaderPath );
 	const cmd = 'node';
 	const params = [
 		'--experimental-loader',
-		loaderPath,
+		loaderURL,
 		entryPoint
 	];
 
