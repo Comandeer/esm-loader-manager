@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { pathToFileURL } from 'node:url';
 import { dirname } from 'node:path';
+import { EOL } from 'node:os';
 import { join as joinPath } from 'node:path';
 import { resolve as resolvePath } from 'node:path';
 import test from 'ava';
@@ -41,7 +42,7 @@ test.after( () => {
 
 test( 'loadURL() loads given file as a buffer', async ( t ) => {
 	const fileURL = pathToFileURL( dummyPath );
-	const expectedFileContent = Buffer.from( 'hublabubla\n' );
+	const expectedFileContent = Buffer.from( `hublabubla${ EOL }` );
 	const fileContent = await loadURL( fileURL );
 
 	t.deepEqual( fileContent, expectedFileContent );
