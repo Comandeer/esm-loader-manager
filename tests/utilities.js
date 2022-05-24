@@ -1,10 +1,9 @@
 import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
-import { pathToFileURL } from 'node:url';
 import { dirname } from 'node:path';
-import { EOL } from 'node:os';
 import { join as joinPath } from 'node:path';
 import { resolve as resolvePath } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { pathToFileURL } from 'node:url';
 import test from 'ava';
 import mockFS from 'mock-fs';
 import { isBuiltInModule } from '../src/utilities.js';

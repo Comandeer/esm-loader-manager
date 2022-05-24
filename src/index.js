@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
-import { resolve as resolvePath } from 'node:path';
 import { existsSync as fileExists } from 'node:fs';
+import { resolve as resolvePath } from 'node:path';
 import { cwd as processCWD } from 'node:process';
 import { env as processEnv } from 'node:process';
 import { pathToFileURL } from 'node:url';

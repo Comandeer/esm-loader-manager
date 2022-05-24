@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
-import { argv, exit, cwd as processCWD } from 'node:process';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { argv } from 'node:process';
+import { cwd as processCWD } from 'node:process';
+import { exit } from 'node:process';
 import { dirname } from 'node:path';
 import { resolve as resolvePath } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { pathToFileURL } from 'node:url';
 import { execa } from 'execa';
 
 const __dirname = dirname( fileURLToPath( import.meta.url ) );
