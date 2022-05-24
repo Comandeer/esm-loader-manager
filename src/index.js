@@ -4,6 +4,7 @@ import { resolve as resolvePath } from 'node:path';
 import { existsSync as fileExists } from 'node:fs';
 import { cwd as processCWD } from 'node:process';
 import { env as processEnv } from 'node:process';
+import { pathToFileURL } from 'node:url';
 import { isBuiltInModule } from './utilities.js';
 import { isInsideDir } from './utilities.js';
 import { isInsideNodeModules } from './utilities.js';
@@ -25,7 +26,8 @@ const loaderPath = loaderFileName ? resolvePath( cwd, loaderFileName ) : null;
 let loaders = [];
 
 if ( loaderPath && fileExists( loaderPath ) ) {
-	const { default: config } = await import( loaderPath );
+	const loaderURL = pathToFileURL( loaderPath );
+	const { default: config } = await import( loaderURL );
 
 	loaders = config.loaders;
 } else {
