@@ -6,6 +6,8 @@ Like [Pirates](https://github.com/danez/pirates) but for ESM.
 
 **Works with Node 16.12.0+**.
 
+⚠️ As ESM loaders are still experimental in Node.js, this package should also be considered experimental. **Use in production environment at your own risk!**
+
 ## How does it work?
 
 This package allows to use several [ESM loaders](https://nodejs.org/api/esm.html#loaders) inside one Node.js application. It basically provides an ESM loader that can be configured to pass some of importing modules to user-provided transformation functions (see [Examples](#Examples) section for more info).
