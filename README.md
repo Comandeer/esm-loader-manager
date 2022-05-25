@@ -10,6 +10,8 @@ Like [Pirates](https://github.com/danez/pirates) but for ESM.
 
 This package allows to use several [ESM loaders](https://nodejs.org/api/esm.html#loaders) inside one Node.js application. It basically provides an ESM loader that can be configured to pass some of importing modules to user-provided transformation functions (see [Examples](#Examples) section for more info).
 
+**Built-in Node.js modules and modules located inside `node_modules` are ignored by the manager!**
+
 ## Installation
 
 ```shell
@@ -112,6 +114,32 @@ If for some reason you want to have a config file under some other name, you can
 ESMLM_CONFIG="./customConfig.js" esmlm .
 ```
 
+## Typings
+
+The package contains also basic typings for the configuration file. They can be used via JSDoc syntax, e.g.:
+
+```javascript
+/**
+ * @type {import('esm-loader-manager').LoaderConfiguration}
+ */
+const config = {
+	loaders: [
+		{
+			matcher( url ) {
+				return url.endsWith( 'module.js' );
+			},
+			loader( url, content ) {
+				return content;
+			}
+		}
+	]
+};
+
+export default config;
+```
+
+For some reason TS seems to have issue when the export is inlined and the type can be incorrectly applied to the `export` itself instead of the exported object. It's much safer to move exported object to its own variable.
+
 ## Examples
 
 ### Transforming PNG images into JS modules
@@ -178,8 +206,8 @@ If you enter the app directory and then run `npm start`, you should see an image
 ## Known limitations
 
 * Only `file://` module URLs are supported.
-* The project root is not customizable, meaning that this package can be less useful in monorepo environments.
-* Typings for configuration files are missing.
+* The project root path is not customizable, meaning that this package can be less useful in monorepo environments.
+* Ignoring built-in modules and `node_modules` ones can't be configured.
 
 ## License
 
