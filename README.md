@@ -40,8 +40,7 @@ The `esmlm` can be e.g. used inside npm scripts:
 
 ```javascript
 {
-    // Rest of package.json
-    //[]
+	// Rest of package.json
 	"scripts": {
 		"start": "esmlm"
 	}
