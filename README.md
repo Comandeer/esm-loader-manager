@@ -60,7 +60,7 @@ The loader manager does nothing on its own but you can declare your loaders insi
 
 ### Configuration file format
 
-The configuration file needs to be named `.esmlmrc.js` or `.esmlmrc.mjs`. 
+The configuration file needs to be named `.esmlmrc.js` or `.esmlmrc.mjs`.
 
 The sample one could look like the one below:
 
@@ -166,7 +166,7 @@ export default {
 			loader( url, content ) {
 				const dataURL = content.toString( 'base64' );
 
-                return `export default "data:image/png;base64,${ dataURL }";`;
+				return `export default "data:image/png;base64,${ dataURL }";`;
 			}
 		}
 	]
@@ -192,7 +192,7 @@ export default {
 
 **sample.png**
 
-Well, a sample PNG image ¯\_(ツ)_/¯
+Well, a sample PNG image ¯\\_(ツ)_/¯
 
 #### Running
 
