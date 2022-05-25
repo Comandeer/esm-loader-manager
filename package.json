@@ -16,8 +16,9 @@
     "esm-loader-manager.d.ts"
   ],
   "engines": {
-    "node": ">=16.7.0"
+    "node": ">=16.12.0"
   },
+  "engineStrict": true,
   "scripts": {
     "lint": "eslint --ext .js,.cjs,.mjs ./src/**/*.js ./tests/**/*.js",
     "pretest": "npm run lint && npm run build",
