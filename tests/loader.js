@@ -25,6 +25,7 @@ const resolvingURLsFixturePath = resolvePath( fixtureDirPath, 'resolvingURLs' );
 const loaderArgsFixturePath = resolvePath( fixtureDirPath, 'loaderArgs' );
 const npmImportsFixturePath = resolvePath( fixtureDirPath, 'npmImports' );
 const builinModulesFixturePath = resolvePath( fixtureDirPath, 'builtinModules' );
+const multipleLoadersFixturePath = resolvePath( fixtureDirPath, 'multipleLoaders' );
 let tempDirPath;
 let noProjectRootFixturePath;
 
@@ -154,5 +155,12 @@ test( 'built-in modules are ignored', createLoaderTest( {
 	fixturePath: builinModulesFixturePath,
 	callback( t, { stdout } ) {
 		t.not( stdout, 'true\ntrue\ntrue' );
+	}
+} ) );
+
+test( 'loaded module is passed through all matched loaders in order', createLoaderTest( {
+	fixturePath: multipleLoadersFixturePath,
+	callback( t, { stdout } ) {
+		t.not( stdout, 'babubla' );
 	}
 } ) );
