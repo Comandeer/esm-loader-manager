@@ -16,6 +16,7 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
  * @typedef {Object} EsmlmTestOptions
  * @property {string} cwd Path to the cwd.
  * @property {string} [entryPoint] The file name to be exectued by Node.
+ * @property {Array<string>} [args] Arguments to be passed to the program.
  * @property {Record<string, string>} [env={}] Additional environment variables to pass to the command.
  * @property {EsmlmTestCallback} callback Callback to invoke after executing command.
  */
@@ -27,14 +28,18 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
 function createEsmlmTest( {
 	cwd,
 	entryPoint,
+	args = [],
 	env = {},
 	callback: userCallback
 } = {} ) {
 	const esmlmPath = resolvePath( __dirname, '..', '..', 'bin', 'esmlm.js' );
 	const cmd = esmlmPath;
 	const params = entryPoint ? [
-		entryPoint
-	] : [];
+		entryPoint,
+		...args
+	] : [
+		...args
+	];
 
 	// Do not propagate coverage into esmlm binary.
 	// For some reason it breaks the coverage calculation.

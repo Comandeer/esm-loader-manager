@@ -13,13 +13,14 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
 const loaderPath = resolvePath( __dirname, '..', 'dist', 'esm-loader-manager.mjs' );
 const loaderURL = pathToFileURL( loaderPath );
 const cwd = processCWD();
-const [ ,, passedEntryPoint ] = argv;
+const [ ,, passedEntryPoint, ...args ] = argv;
 const entryPoint = passedEntryPoint ? resolvePath( cwd, passedEntryPoint ) : cwd;
 const cmd = 'node';
 const params = [
 	'--experimental-loader',
 	loaderURL,
-	entryPoint
+	entryPoint,
+	...args
 ];
 
 const { exitCode } = await execa( cmd, params, {
