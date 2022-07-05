@@ -63,7 +63,7 @@ test( 'esmlm throws error when incorrect relative path is passed as the paramete
 } ) );
 
 // #2
-test.only( 'esmlm correctly passes arguments to the underlying program', createEsmlmTest( {
+test( 'esmlm correctly passes arguments to the underlying program', createEsmlmTest( {
 	cwd: esmlmArgsFixturePath,
 	entryPoint: esmlmArgsFixtureEntryPointPath,
 	args: sampleArgs,
