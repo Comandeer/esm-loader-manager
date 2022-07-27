@@ -29,4 +29,4 @@ const { exitCode } = await execa( cmd, params, {
 	reject: false
 } );
 
-exit( exitCode );
+exit( typeof exitCode === 'number' ? exitCode : 1 );
