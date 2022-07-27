@@ -10,7 +10,9 @@ const esmlmFixturePath = resolvePath( fixtureDirPath, 'esmlm' );
 const esmlmFixtureEntryPointPath = resolvePath( esmlmFixturePath, 'index.js' );
 const esmlmArgsFixturePath = resolvePath( fixtureDirPath, 'esmlmArgs' );
 const esmlmArgsFixtureEntryPointPath = resolvePath( esmlmArgsFixturePath, 'index.js' );
+const esmlmErrorFixturePath = resolvePath( fixtureDirPath, 'esmlmError' );
 const successfulExitCode = 0;
+const unsuccessfulExitCode = 1;
 const sampleArgs = [
 	'some-path',
 	'--some-arg'
@@ -70,5 +72,16 @@ test( 'esmlm correctly passes arguments to the underlying program', createEsmlmT
 	callback( t, { stdout, exitCode } ) {
 		t.is( stdout, sampleArgs.join( ' ' ) );
 		t.is( exitCode, successfulExitCode );
+	}
+} ) );
+
+// #1
+test( 'esmlm does not duplicate error messages', createEsmlmTest( {
+	cwd: esmlmErrorFixturePath,
+	callback( t, { stderr, exitCode } ) {
+		const moduleNotFoundError = /Error: Command failed with exit code 1/;
+
+		t.notRegex( stderr, moduleNotFoundError );
+		t.is( exitCode, unsuccessfulExitCode );
 	}
 } ) );

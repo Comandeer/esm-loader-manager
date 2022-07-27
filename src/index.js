@@ -79,6 +79,7 @@ async function load( url, context, defaultLoad ) {
 
 	return {
 		format: 'module',
+		shortCircuit: true,
 		source
 	};
 }

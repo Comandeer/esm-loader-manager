@@ -25,7 +25,8 @@ const params = [
 
 const { exitCode } = await execa( cmd, params, {
 	cwd,
-	stdio: 'inherit'
+	stdio: 'inherit',
+	reject: false
 } );
 
-exit( exitCode );
+exit( typeof exitCode === 'number' ? exitCode : 1 );
