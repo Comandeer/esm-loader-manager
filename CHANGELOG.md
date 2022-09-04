@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * [#1]: The `esmlm` binary now handles errors in more user-friendly manner.
 
 ### Fixed
-* [#3]: The loader does not work correctly in Node 18.6.0.
+* [#5]: The loader does not work correctly in Node 18.6+.
 
 ## 0.1.0 – 2022-05-26
 ### Added
@@ -22,6 +22,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 [#1]: https://github.com/Comandeer/esm-loader-manager/issues/1
 [#2]: https://github.com/Comandeer/esm-loader-manager/issues/2
-[#3]: https://github.com/Comandeer/esm-loader-manager/issues/3
+[#5]: https://github.com/Comandeer/esm-loader-manager/issues/5
 
 [0.2.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.1.0...v0.2.0
