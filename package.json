@@ -8,7 +8,7 @@
   },
   "types": "esm-loader-manager.d.ts",
   "bin": {
-    "esmlm": "bin/esmlm.js"
+    "esmlm": "./bin/esmlm.js"
   },
   "files": [
     "bin",
@@ -68,17 +68,17 @@
     "scope": "\\S+.*"
   },
   "devDependencies": {
-    "@comandeer/eslint-config": "^0.8.0",
-    "@comandeer/rollup-lib-bundler": "^0.16.0",
-    "ava": "^4.2.0",
-    "c8": "^7.11.3",
+    "@comandeer/eslint-config": "^0.10.0",
+    "@comandeer/rollup-lib-bundler": "^0.20.0",
+    "ava": "^5.3.1",
+    "c8": "^8.0.0",
     "commitplease": "^3.2.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.16.0",
-    "husky": "^8.0.1",
-    "mock-fs": "^5.1.2"
+    "eslint": "^8.44.0",
+    "husky": "^8.0.3",
+    "mock-fs": "^5.2.0"
   },
   "dependencies": {
-    "execa": "^6.1.0"
+    "execa": "^7.1.1"
   }
 }

@@ -8,6 +8,7 @@ node_modules/
 coverage/
 .coverage/
 dist
+bin
 docs/dist
 npm-debug.log
 /.nyc_output
