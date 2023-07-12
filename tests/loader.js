@@ -130,7 +130,7 @@ test( 'loader() receives correct arguments', createLoaderTest( {
 } ) );
 
 test( 'loader without a project root restricts itself to CWD', ( t ) => {
-	const test = createLoaderTest( {
+	const currentTest = createLoaderTest( {
 		fixturePath: noProjectRootFixturePath,
 		entryPoint: 'index.mjs',
 		callback( t, { stdout, stderr } ) {
@@ -141,7 +141,7 @@ test( 'loader without a project root restricts itself to CWD', ( t ) => {
 		}
 	} );
 
-	return test( t );
+	return currentTest( t );
 } );
 
 test( 'modules inside node_modules are ignored', createLoaderTest( {
