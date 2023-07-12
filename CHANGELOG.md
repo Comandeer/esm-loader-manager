@@ -6,9 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
-## [0.3.0]
+## [0.3.0] – 2023-07-13
 ### Added
 * [#8]: Official support for Node 20.
+
+### Changed
+* [#9]: **BREAKING CHANGE**: updated `execa` dependency from `^6.1.0` to `^7.1.1`.
 
 ### Fixed
 * [#6]: Incorrect results returned by `isInsideDir()` on Windows.
@@ -32,6 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [#5]: https://github.com/Comandeer/esm-loader-manager/issues/5
 [#6]: https://github.com/Comandeer/esm-loader-manager/issues/6
 [#8]: https://github.com/Comandeer/esm-loader-manager/issues/8
+[#9]: https://github.com/Comandeer/esm-loader-manager/issues/9
 
 [0.3.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.1.0...v0.2.0
