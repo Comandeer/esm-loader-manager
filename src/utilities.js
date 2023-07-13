@@ -1,8 +1,8 @@
 import { readdir } from 'node:fs/promises';
 import { readFile } from 'node:fs/promises';
-import { isAbsolute } from 'node:path';
-import { relative as getRelativePath } from 'node:path';
-import { resolve as resolvePath } from 'node:path';
+import { isAbsolute } from 'pathe';
+import { relative as getRelativePath } from 'pathe';
+import { resolve as resolvePath } from 'pathe';
 import { fileURLToPath } from 'node:url';
 
 async function loadURL( url ) {

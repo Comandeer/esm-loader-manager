@@ -1,5 +1,5 @@
-import { dirname } from 'node:path';
-import { resolve as resolvePath } from 'node:path';
+import { dirname } from 'pathe';
+import { resolve as resolvePath } from 'pathe';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import test from 'ava';
 import testCmd from '../testCmd.js';

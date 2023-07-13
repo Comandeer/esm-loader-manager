@@ -1,5 +1,5 @@
 import { platform } from 'node:os';
-import { sep as separator } from 'node:path';
+import { sep as separator } from 'pathe';
 
 /**
  * @param {string} posixPath

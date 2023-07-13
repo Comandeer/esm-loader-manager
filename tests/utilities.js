@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
-import { dirname } from 'node:path';
-import { join as joinPath } from 'node:path';
-import { resolve as resolvePath } from 'node:path';
+import { dirname } from 'pathe';
+import { join as joinPath } from 'pathe';
+import { resolve as resolvePath } from 'pathe';
 import { fileURLToPath } from 'node:url';
 import { pathToFileURL } from 'node:url';
 import test from 'ava';

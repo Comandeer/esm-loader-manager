@@ -1,5 +1,5 @@
-import { dirname } from 'node:path';
-import { resolve as resolvePath } from 'node:path';
+import { dirname } from 'pathe';
+import { resolve as resolvePath } from 'pathe';
 import { fileURLToPath } from 'node:url';
 import test from 'ava';
 import testEsmlm from './__helpers__/macros/testEsmlm.js';
