@@ -2,7 +2,7 @@ import { dirname } from 'node:path';
 import { resolve as resolvePath } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'ava';
-import createEsmlmTest from './__helpers__/createEsmlmTest.js';
+import testEsmlm from './__helpers__/macros/testEsmlm.js';
 
 const __dirname = dirname( fileURLToPath( import.meta.url ) );
 const fixtureDirPath = resolvePath( __dirname, '__fixtures__' );
@@ -18,42 +18,42 @@ const sampleArgs = [
 	'--some-arg'
 ];
 
-test( 'esmlm correctly launches Node.js module without any parameters', createEsmlmTest( {
+test( 'esmlm correctly launches Node.js module without any parameters', testEsmlm, {
 	cwd: esmlmFixturePath,
 	callback( t, { stdout, exitCode } ) {
 		t.is( stdout, 'true' );
 		t.is( exitCode, successfulExitCode );
 	}
-} ) );
+} );
 
-test( 'esmlm correctly launches Node.js module with the absolute path as the parameter', createEsmlmTest( {
+test( 'esmlm correctly launches Node.js module with the absolute path as the parameter', testEsmlm, {
 	cwd: esmlmFixturePath,
 	entryPoint: esmlmFixtureEntryPointPath,
 	callback( t, { stdout, exitCode } ) {
 		t.is( stdout, 'true' );
 		t.is( exitCode, successfulExitCode );
 	}
-} ) );
+} );
 
-test( 'esmlm correctly launches Node.js module with the relative path as the parameter', createEsmlmTest( {
+test( 'esmlm correctly launches Node.js module with the relative path as the parameter', testEsmlm, {
 	cwd: esmlmFixturePath,
 	entryPoint: 'index.js',
 	callback( t, { stdout, exitCode } ) {
 		t.is( stdout, 'true' );
 		t.is( exitCode, successfulExitCode );
 	}
-} ) );
+} );
 
-test( 'esmlm correctly launches Node.js module with the "." as the parameter', createEsmlmTest( {
+test( 'esmlm correctly launches Node.js module with the "." as the parameter', testEsmlm, {
 	cwd: esmlmFixturePath,
 	entryPoint: '.',
 	callback( t, { stdout, exitCode } ) {
 		t.is( stdout, 'true' );
 		t.is( exitCode, successfulExitCode );
 	}
-} ) );
+} );
 
-test( 'esmlm throws error when incorrect relative path is passed as the parameter', createEsmlmTest( {
+test( 'esmlm throws error when incorrect relative path is passed as the parameter', testEsmlm, {
 	cwd: esmlmFixturePath,
 	entryPoint: './non-existent.js',
 	callback( t, { stderr, exitCode } ) {
@@ -62,10 +62,10 @@ test( 'esmlm throws error when incorrect relative path is passed as the paramete
 		t.regex( stderr, moduleNotFoundError );
 		t.not( exitCode, 0 );
 	}
-} ) );
+} );
 
 // #2
-test( 'esmlm correctly passes arguments to the underlying program', createEsmlmTest( {
+test( 'esmlm correctly passes arguments to the underlying program', testEsmlm, {
 	cwd: esmlmArgsFixturePath,
 	entryPoint: esmlmArgsFixtureEntryPointPath,
 	args: sampleArgs,
@@ -73,10 +73,10 @@ test( 'esmlm correctly passes arguments to the underlying program', createEsmlmT
 		t.is( stdout, sampleArgs.join( ' ' ) );
 		t.is( exitCode, successfulExitCode );
 	}
-} ) );
+} );
 
 // #1
-test( 'esmlm does not duplicate error messages', createEsmlmTest( {
+test( 'esmlm does not duplicate error messages', testEsmlm, {
 	cwd: esmlmErrorFixturePath,
 	callback( t, { stderr, exitCode } ) {
 		const moduleNotFoundError = /Error: Command failed with exit code 1/;
@@ -84,4 +84,4 @@ test( 'esmlm does not duplicate error messages', createEsmlmTest( {
 		t.notRegex( stderr, moduleNotFoundError );
 		t.is( exitCode, unsuccessfulExitCode );
 	}
-} ) );
+} );

@@ -1,7 +1,8 @@
 import { dirname } from 'node:path';
 import { resolve as resolvePath } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import createCmdTest from './createCmdTest.js';
+import test from 'ava';
+import testCmd from '../testCmd.js';
 
 const __dirname = dirname( fileURLToPath( import.meta.url ) );
 
@@ -21,16 +22,17 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
  */
 
 /**
+ * @param {import('ava').ExecutionContext<unknown>} t Test execution context
  * @param {LoaderTestOptions} options
  * @returns {() => Promise}
  */
-function createLoaderTest( {
+const testLoader = test.macro( ( t, {
 	fixturePath,
 	entryPoint = fixturePath,
 	env = {},
 	callback: userCallback
-} = {} ) {
-	const loaderPath = resolvePath( __dirname, '..', '..', 'src', 'index.js' );
+} = {} ) => {
+	const loaderPath = resolvePath( __dirname, '..', '..', '..', 'src', 'index.js' );
 	const loaderURL = pathToFileURL( loaderPath );
 	const cmd = 'node';
 	const params = [
@@ -39,7 +41,7 @@ function createLoaderTest( {
 		entryPoint
 	];
 
-	return createCmdTest( {
+	return testCmd( t, {
 		cmd,
 		params,
 		env,
@@ -48,6 +50,6 @@ function createLoaderTest( {
 			return userCallback( t, results );
 		}
 	} );
-}
+} );
 
-export default createLoaderTest;
+export default testLoader;

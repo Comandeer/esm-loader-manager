@@ -7,7 +7,7 @@ import { join as joinPath } from 'node:path';
 import { resolve as resolvePath } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'ava';
-import createLoaderTest from './__helpers__/createLoaderTest.js';
+import testLoader from './__helpers__/macros/testLoader.js';
 
 const __dirname = dirname( fileURLToPath( import.meta.url ) );
 const fixtureDirPath = resolvePath( __dirname, '__fixtures__' );
@@ -49,23 +49,23 @@ test.after.always( async () => {
 	} );
 } );
 
-test( 'loader raises an error if loaders\' definitions are not found', createLoaderTest( {
+test( 'loader raises an error if loaders\' definitions are not found', testLoader, {
 	fixturePath: withoutLoaderFileFixturePath,
 	callback( t, { stderr } ) {
 		const errorRegex = /ESMLM:.*?The file with loaders' definition was not found./;
 
 		t.regex( stderr, errorRegex );
 	}
-} ) );
+} );
 
-test( 'loader correctly uses user-provided loader', createLoaderTest( {
+test( 'loader correctly uses user-provided loader', testLoader, {
 	fixturePath: simpleLoaderFixturePath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'hublabubla' );
 	}
-} ) );
+} );
 
-test( 'path to the config file can be passed as environment variable (relative one)', createLoaderTest( {
+test( 'path to the config file can be passed as environment variable (relative one)', testLoader, {
 	fixturePath: customConfigFileFixturePath,
 	env: {
 		ESMLM_CONFIG: './customConfig.mjs'
@@ -73,9 +73,9 @@ test( 'path to the config file can be passed as environment variable (relative o
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
 	}
-} ) );
+} );
 
-test( 'path to the config file can be passed as environment variable (absolute one)', createLoaderTest( {
+test( 'path to the config file can be passed as environment variable (absolute one)', testLoader, {
 	fixturePath: customConfigFileFixturePath,
 	env: {
 		ESMLM_CONFIG: resolvePath( customConfigFileFixturePath, 'customConfig.mjs' )
@@ -83,54 +83,54 @@ test( 'path to the config file can be passed as environment variable (absolute o
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
 	}
-} ) );
+} );
 
-test( 'module config file works correctly', createLoaderTest( {
+test( 'module config file works correctly', testLoader, {
 	fixturePath: moduleConfigFileFixturePath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
 	}
-} ) );
+} );
 
-test( 'nested module uses correct config file', createLoaderTest( {
+test( 'nested module uses correct config file', testLoader, {
 	fixturePath: nestedLoaderLevel1DirPath,
 	entryPoint: 'someNestedModule.js',
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
 	}
-} ) );
+} );
 
-test( 'deeply nested module uses correct config file', createLoaderTest( {
+test( 'deeply nested module uses correct config file', testLoader, {
 	fixturePath: nestedLoaderLevel3DirPath,
 	entryPoint: 'superDeeplyNested.js',
 	callback( t, { stdout } ) {
 		t.is( stdout, 'nested' );
 	}
-} ) );
+} );
 
-test( 'loader ignores modules loaded from the outside of project root', createLoaderTest( {
+test( 'loader ignores modules loaded from the outside of project root', testLoader, {
 	fixturePath: nestedProjectRootDirPath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'false' );
 	}
-} ) );
+} );
 
-test( 'both resolver and loader are matched against module URL', createLoaderTest( {
+test( 'both resolver and loader are matched against module URL', testLoader, {
 	fixturePath: resolvingURLsFixturePath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
 	}
-} ) );
+} );
 
-test( 'loader() receives correct arguments', createLoaderTest( {
+test( 'loader() receives correct arguments', testLoader, {
 	fixturePath: loaderArgsFixturePath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'true' );
 	}
-} ) );
+} );
 
 test( 'loader without a project root restricts itself to CWD', ( t ) => {
-	const currentTest = createLoaderTest( {
+	return testLoader.exec( t, {
 		fixturePath: noProjectRootFixturePath,
 		entryPoint: 'index.mjs',
 		callback( t, { stdout, stderr } ) {
@@ -140,27 +140,25 @@ test( 'loader without a project root restricts itself to CWD', ( t ) => {
 			t.true( stderr.includes( projectRootNotDetectedError ) );
 		}
 	} );
-
-	return currentTest( t );
 } );
 
-test( 'modules inside node_modules are ignored', createLoaderTest( {
+test( 'modules inside node_modules are ignored', testLoader, {
 	fixturePath: npmImportsFixturePath,
 	callback( t, { stdout } ) {
 		t.is( stdout, 'false\nfalse' );
 	}
-} ) );
+} );
 
-test( 'built-in modules are ignored', createLoaderTest( {
+test( 'built-in modules are ignored', testLoader, {
 	fixturePath: builinModulesFixturePath,
 	callback( t, { stdout } ) {
 		t.not( stdout, 'true\ntrue\ntrue' );
 	}
-} ) );
+} );
 
-test( 'loaded module is passed through all matched loaders in order', createLoaderTest( {
+test( 'loaded module is passed through all matched loaders in order', testLoader, {
 	fixturePath: multipleLoadersFixturePath,
 	callback( t, { stdout } ) {
 		t.not( stdout, 'babubla' );
 	}
-} ) );
+} );
