@@ -18,30 +18,29 @@ import { execa } from 'execa';
  */
 
 /**
+ * @param {import('ava').ExecutionContext<unknown>} t Test execution context
  * @param {CmdTestOptions} options
  * @returns {() => Promise}
  */
-function createCmdTest( {
+async function testCmd( t, {
 	cmd,
 	callback,
 	params = [],
 	env = {},
 	cwd = processCWD()
 } = {} ) {
-	return async ( t ) => {
-		let result;
+	let result;
 
-		try {
-			result = await execa( cmd, params, {
-				cwd,
-				env
-			} );
-		} catch ( error ) {
-			result = error;
-		}
+	try {
+		result = await execa( cmd, params, {
+			cwd,
+			env
+		} );
+	} catch ( error ) {
+		result = error;
+	}
 
-		return callback( t, result );
-	};
+	return callback( t, result );
 }
 
-export default createCmdTest;
+export default testCmd;
