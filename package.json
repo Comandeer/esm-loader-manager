@@ -79,6 +79,7 @@
     "mock-fs": "^5.2.0"
   },
   "dependencies": {
-    "execa": "^7.1.1"
+    "execa": "^7.1.1",
+    "pathe": "^1.1.1"
   }
 }
