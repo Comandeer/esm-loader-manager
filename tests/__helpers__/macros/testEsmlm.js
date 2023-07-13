@@ -1,7 +1,8 @@
 import { dirname } from 'node:path';
 import { resolve as resolvePath } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import createCmdTest from './createCmdTest.js';
+import test from 'ava';
+import testCmd from '../testCmd.js';
 
 const __dirname = dirname( fileURLToPath( import.meta.url ) );
 
@@ -22,17 +23,18 @@ const __dirname = dirname( fileURLToPath( import.meta.url ) );
  */
 
 /**
+ * @param {import('ava').ExecutionContext<unknown>} t Test execution context
  * @param {EsmlmTestOptions} options
  * @returns {() => Promise}
  */
-function createEsmlmTest( {
+const testEsmlm = test.macro( ( t, {
 	cwd,
 	entryPoint,
 	args = [],
 	env = {},
 	callback: userCallback
-} = {} ) {
-	const esmlmPath = resolvePath( __dirname, '..', '..', 'bin', 'esmlm.js' );
+} = {} ) => {
+	const esmlmPath = resolvePath( __dirname, '..', '..', '..', 'bin', 'esmlm.js' );
 	const cmd = esmlmPath;
 	const params = entryPoint ? [
 		entryPoint,
@@ -45,7 +47,7 @@ function createEsmlmTest( {
 	// For some reason it breaks the coverage calculation.
 	env.NODE_V8_COVERAGE = '';
 
-	return createCmdTest( {
+	return testCmd( t, {
 		cmd,
 		params,
 		env,
@@ -54,6 +56,6 @@ function createEsmlmTest( {
 			return userCallback( t, results );
 		}
 	} );
-}
+} );
 
-export default createEsmlmTest;
+export default testEsmlm;
