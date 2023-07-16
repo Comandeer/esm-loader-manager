@@ -1,5 +1,4 @@
 import { platform } from 'node:os';
-import { sep as separator } from 'pathe';
 
 /**
  * @param {string} posixPath
@@ -10,8 +9,7 @@ function createAbsolutePath( posixPath ) {
 		return posixPath;
 	}
 
-	const pathWithReplacedSeparators = posixPath.replaceAll( '/', separator );
-	const windowsPath = `C:\\${ pathWithReplacedSeparators }`;
+	const windowsPath = `/C:/${ posixPath }`;
 
 	return windowsPath;
 }
