@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
-## [0.4.0]
+## [0.4.0] – 2023-07-16
 ### Changed
 * [#13]: **BREAKING CHANGE**: added the `pathe` dependency to replace `node:path` usage in all path-related tasks.
 * [#18]: **BREAKING CHANGE**: changed logic for detecting and loading the loader file.
