@@ -3,8 +3,8 @@
 import { argv } from 'node:process';
 import { cwd as processCWD } from 'node:process';
 import { exit } from 'node:process';
-import { dirname } from 'node:path';
-import { resolve as resolvePath } from 'node:path';
+import { dirname } from 'pathe';
+import { resolve as resolvePath } from 'pathe';
 import { fileURLToPath } from 'node:url';
 import { pathToFileURL } from 'node:url';
 import { execa } from 'execa';

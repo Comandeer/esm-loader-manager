@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
 
-import { existsSync as fileExists } from 'node:fs';
-import { resolve as resolvePath } from 'node:path';
+import { access } from 'node:fs/promises';
 import { cwd as processCWD } from 'node:process';
 import { env as processEnv } from 'node:process';
 import { pathToFileURL } from 'node:url';
-import { isBuiltInModule } from './utilities.js';
-import { isInsideDir } from './utilities.js';
-import { isInsideNodeModules } from './utilities.js';
-import { resolveConfigFile } from './utilities.js';
-import { resolveProjectRoot } from './utilities.js';
-import { loadURL } from './utilities.js';
+import { resolve as resolvePath } from 'pathe';
+import isBuiltInModule from './utilities/isBuiltInModule.js';
+import isInsideDir from './utilities/isInsideDir.js';
+import isInsideNodeModules from './utilities/isInsideNodeModules.js';
+import resolveConfigFile from './utilities/resolveConfigFile.js';
+import resolveProjectRoot from './utilities/resolveProjectRoot.js';
+import loadURL from './utilities/loadURL.js';
 
 const cwd = processCWD();
 const resolvedProjectRoot = await resolveProjectRoot( cwd );
@@ -25,13 +25,15 @@ const loaderFileName = 'ESMLM_CONFIG' in processEnv ? processEnv.ESMLM_CONFIG :
 const loaderPath = loaderFileName ? resolvePath( cwd, loaderFileName ) : null;
 let loaders = [];
 
-if ( loaderPath && fileExists( loaderPath ) ) {
+try {
+	await access( loaderPath );
+
 	const loaderURL = pathToFileURL( loaderPath );
 	const { default: config } = await import( loaderURL );
 
 	loaders = config.loaders;
-} else {
-	console.warn( 'ESMLM: The file with loaders\' definition was not found.' );
+} catch {
+	console.warn( 'ESMLM: The file with loaders\' definition was not found or cannot be accessed.' );
 }
 
 async function resolve( specifier, context, defaultResolve ) {
