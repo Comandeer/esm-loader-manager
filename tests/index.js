@@ -146,6 +146,7 @@ test( 'loader without a project root restricts itself to CWD', ( t ) => {
 		fixturePath: noProjectRootFixturePath,
 		entryPoint: 'index.mjs',
 		callback( t, { stdout, stderr } ) {
+			console.log( stdout, stderr ); // eslint-disable-line
 			const projectRootNotDetectedError = 'ESMLM: The project root was not detected. Falling back to the CWD.';
 
 			t.is( stdout, 'true\ntrue\nfalse' );
