@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.4.0]
 ### Changed
 * [#13]: **BREAKING CHANGE**: added the `pathe` dependency to replace `node:path` usage in all path-related tasks.
+* [#18]: **BREAKING CHANGE**: changed logic for detecting and loading the loader file.
 
 ### Fixed
 * [#17]: incorrect error handling in the `resolveConfigFile()` utility.
@@ -45,6 +46,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [#9]: https://github.com/Comandeer/esm-loader-manager/issues/9
 [#13]: https://github.com/Comandeer/esm-loader-manager/issues/13
 [#17]: https://github.com/Comandeer/esm-loader-manager/issues/17
+[#18]: https://github.com/Comandeer/esm-loader-manager/issues/18
 
 [0.4.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.2.0...v0.3.0
