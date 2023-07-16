@@ -2,15 +2,12 @@ import { cp } from 'node:fs/promises';
 import { mkdtemp } from 'node:fs/promises';
 import { rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { dirname } from 'pathe';
 import { join as joinPath } from 'pathe';
 import { resolve as resolvePath } from 'pathe';
-import { fileURLToPath } from 'node:url';
 import test from 'ava';
+import fixtureDirPath from './__helpers__/fixtureDirPath.js';
 import testLoader from './__helpers__/macros/testLoader.js';
 
-const __dirname = dirname( fileURLToPath( import.meta.url ) );
-const fixtureDirPath = resolvePath( __dirname, '__fixtures__' );
 const simpleLoaderFixturePath = resolvePath( fixtureDirPath, 'simpleLoader' );
 const withoutLoaderFileFixturePath = resolvePath( fixtureDirPath, 'projectWithoutLoaderFile' );
 const customConfigFileFixturePath = resolvePath( fixtureDirPath, 'customConfigFile' );

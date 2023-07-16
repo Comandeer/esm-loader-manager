@@ -1,11 +1,8 @@
-import { dirname } from 'pathe';
 import { resolve as resolvePath } from 'pathe';
-import { fileURLToPath } from 'node:url';
 import test from 'ava';
+import fixtureDirPath from './__helpers__/fixtureDirPath.js';
 import testEsmlm from './__helpers__/macros/testEsmlm.js';
 
-const __dirname = dirname( fileURLToPath( import.meta.url ) );
-const fixtureDirPath = resolvePath( __dirname, '__fixtures__' );
 const esmlmFixturePath = resolvePath( fixtureDirPath, 'esmlm' );
 const esmlmFixtureEntryPointPath = resolvePath( esmlmFixturePath, 'index.js' );
 const esmlmArgsFixturePath = resolvePath( fixtureDirPath, 'esmlmArgs' );
