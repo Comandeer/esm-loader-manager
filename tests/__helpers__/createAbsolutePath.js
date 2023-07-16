@@ -6,7 +6,7 @@ import { sep as separator } from 'pathe';
  * @returns {string} Path compatible with the operating system.
  */
 function createAbsolutePath( posixPath ) {
-	if ( platform !== 'win32' ) {
+	if ( platform() !== 'win32' ) {
 		return posixPath;
 	}
 
