@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 
-import { existsSync as fileExists } from 'node:fs';
-import { resolve as resolvePath } from 'pathe';
+import { access } from 'node:fs/promises';
 import { cwd as processCWD } from 'node:process';
 import { env as processEnv } from 'node:process';
 import { pathToFileURL } from 'node:url';
+import { resolve as resolvePath } from 'pathe';
 import isBuiltInModule from './utilities/isBuiltInModule.js';
 import isInsideDir from './utilities/isInsideDir.js';
 import isInsideNodeModules from './utilities/isInsideNodeModules.js';
@@ -25,13 +25,15 @@ const loaderFileName = 'ESMLM_CONFIG' in processEnv ? processEnv.ESMLM_CONFIG :
 const loaderPath = loaderFileName ? resolvePath( cwd, loaderFileName ) : null;
 let loaders = [];
 
-if ( loaderPath && fileExists( loaderPath ) ) {
+try {
+	await access( loaderPath );
+
 	const loaderURL = pathToFileURL( loaderPath );
 	const { default: config } = await import( loaderURL );
 
 	loaders = config.loaders;
-} else {
-	console.warn( 'ESMLM: The file with loaders\' definition was not found.' );
+} catch {
+	console.warn( 'ESMLM: The file with loaders\' definition was not found or cannot be accessed.' );
 }
 
 async function resolve( specifier, context, defaultResolve ) {

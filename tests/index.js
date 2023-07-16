@@ -61,7 +61,7 @@ test( 'package exports correct exports', async ( t ) => {
 test( 'loader raises an error if loaders\' definitions are not found', testLoader, {
 	fixturePath: withoutLoaderFileFixturePath,
 	callback( t, { stderr } ) {
-		const errorRegex = /ESMLM:.*?The file with loaders' definition was not found./;
+		const errorRegex = /ESMLM:.*?The file with loaders' definition was not found or cannot be accessed./;
 
 		t.regex( stderr, errorRegex );
 	}
@@ -143,7 +143,6 @@ test( 'loader without a project root restricts itself to CWD', ( t ) => {
 		fixturePath: noProjectRootFixturePath,
 		entryPoint: 'index.mjs',
 		callback( t, { stdout, stderr } ) {
-			console.log( stdout, stderr ); // eslint-disable-line
 			const projectRootNotDetectedError = 'ESMLM: The project root was not detected. Falling back to the CWD.';
 
 			t.is( stdout, 'true\ntrue\nfalse' );
