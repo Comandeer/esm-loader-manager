@@ -109,6 +109,17 @@ test( 'resolveConfigFile() returns null if the config file is not found in the p
 	t.is( resolvedConfigFilePath, expectedConfigFilePath );
 } );
 
+// #17
+test( 'resolveConfigFile() returns null in case of any error', async ( t ) => {
+	const expectedConfigFilePath = null;
+	// Yup, this test will fail if there is a /hublabubla directory.
+	// But… why would you have it??!!
+	const nonExistentDirPath = '/hublabubla/';
+	const resolvedConfigFilePath = await resolveConfigFile( nonExistentDirPath, nonExistentDirPath );
+
+	t.is( resolvedConfigFilePath, expectedConfigFilePath );
+} );
+
 test( 'isInsideDir() returns true for a file inside the provided root path', ( t ) => {
 	const rootPath = createAbsolutePath( '/some/dummy/path' );
 	const modulePath = joinPath( rootPath, 'index.js' );

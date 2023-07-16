@@ -36,26 +36,30 @@ const configFileExtensions = [
 ];
 
 async function resolveConfigFile( startDir, projectRoot ) {
-	const files = await readdir( startDir );
+	try {
+		const files = await readdir( startDir );
 
-	for ( const extension of configFileExtensions ) {
-		const configFileFullName = `${ configFileName }${ extension }`;
+		for ( const extension of configFileExtensions ) {
+			const configFileFullName = `${ configFileName }${ extension }`;
 
-		if ( files.includes( configFileFullName ) ) {
-			const resolvedConfigFilePath = resolvePath( startDir, configFileFullName );
+			if ( files.includes( configFileFullName ) ) {
+				const resolvedConfigFilePath = resolvePath( startDir, configFileFullName );
 
-			return resolvedConfigFilePath;
+				return resolvedConfigFilePath;
+			}
 		}
-	}
 
-	// Do not go outside of the project root.
-	if ( startDir === projectRoot ) {
+		// Do not go outside of the project root.
+		if ( startDir === projectRoot ) {
+			return null;
+		}
+
+		const dirUp = resolvePath( startDir, '..' );
+
+		return resolveConfigFile( dirUp );
+	} catch {
 		return null;
 	}
-
-	const dirUp = resolvePath( startDir, '..' );
-
-	return resolveConfigFile( dirUp );
 }
 
 function isInsideDir( dir, pathOrURL ) {
