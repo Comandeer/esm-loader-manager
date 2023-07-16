@@ -12,21 +12,25 @@ async function loadURL( url ) {
 }
 
 async function resolveProjectRoot( startDir ) {
-	const files = await readdir( startDir );
+	try {
+		const files = await readdir( startDir );
 
-	if ( files.includes( 'package.json' ) ) {
-		return startDir;
-	}
+		if ( files.includes( 'package.json' ) ) {
+			return startDir;
+		}
 
-	const dirUp = resolvePath( startDir, '..' );
+		const dirUp = resolvePath( startDir, '..' );
 
-	// If directory one level up is the same as the current on,
-	// we're at / and there's nowhere to go up.
-	if ( dirUp === startDir ) {
+		// If directory one level up is the same as the current on,
+		// we're at / and there's nowhere to go up.
+		if ( dirUp === startDir ) {
+			return null;
+		}
+
+		return resolveProjectRoot( dirUp );
+	} catch {
 		return null;
 	}
-
-	return resolveProjectRoot( dirUp );
 }
 
 const configFileName = '.esmlmrc';

@@ -66,6 +66,15 @@ test( 'resolveProjectRoot() returns null if reaches / without finding package.js
 	t.is( resolvedProjectRoot, null );
 } );
 
+// #17
+test( 'resolveProjectRoot() returns null in case of any error', async ( t ) => {
+	const expectedConfigFilePath = null;
+	const nonExistentDirPath = '/hublabubla/';
+	const resolvedConfigFilePath = await resolveProjectRoot( nonExistentDirPath, nonExistentDirPath );
+
+	t.is( resolvedConfigFilePath, expectedConfigFilePath );
+} );
+
 test( 'resolveConfigFile() points to the nearest .esmlmrc.js file (same dir)', async ( t ) => {
 	const expectedConfigFilePath = resolvePath( simpleLoaderDirPath, configFileName );
 	const resolvedConfigFilePath = await resolveConfigFile( simpleLoaderDirPath, simpleLoaderDirPath );
@@ -112,8 +121,6 @@ test( 'resolveConfigFile() returns null if the config file is not found in the p
 // #17
 test( 'resolveConfigFile() returns null in case of any error', async ( t ) => {
 	const expectedConfigFilePath = null;
-	// Yup, this test will fail if there is a /hublabubla directory.
-	// But… why would you have it??!!
 	const nonExistentDirPath = '/hublabubla/';
 	const resolvedConfigFilePath = await resolveConfigFile( nonExistentDirPath, nonExistentDirPath );
 
