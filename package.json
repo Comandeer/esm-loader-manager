@@ -68,13 +68,13 @@
     "scope": "\\S+.*"
   },
   "devDependencies": {
-    "@comandeer/eslint-config": "^0.10.0",
-    "@comandeer/rollup-lib-bundler": "^0.20.0",
+    "@comandeer/eslint-config": "^0.11.1",
+    "@comandeer/rollup-lib-bundler": "^0.22.1",
     "ava": "^5.3.1",
-    "c8": "^8.0.0",
+    "c8": "^8.0.1",
     "commitplease": "^3.2.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.44.0",
+    "eslint": "^8.46.0",
     "husky": "^8.0.3",
     "mock-fs": "^5.2.0"
   },
