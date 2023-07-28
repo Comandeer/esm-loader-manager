@@ -13,14 +13,6 @@ interface CmdTestOptions {
 	callback: CmdTestCallback;
 }
 
-/**
- * @typedef {Object} CmdTestOptions
- * @property {string} cmd Command to execute;
- * @property {Array<string>} [params=[]] Command's parameters.
- * @property {string} [cwd=process.cwd()] CWD for tee command
- * @property {Record<string, string>} [env={}] Additional environment variables to pass to the command.
- * @property {CmdTestCallback} callback
- */
 async function testCmd( t: ExecutionContext, {
 	cmd,
 	callback,
@@ -28,16 +20,11 @@ async function testCmd( t: ExecutionContext, {
 	env = {},
 	cwd = processCWD()
 }: CmdTestOptions ): Promise<void> {
-	let result;
-
-	try {
-		result = await execa( cmd, params, {
-			cwd,
-			env
-		} );
-	} catch ( error ) {
-		result = error;
-	}
+	const result = await execa( cmd, params, {
+		cwd,
+		env,
+		reject: false
+	} );
 
 	return callback( t, result );
 }
