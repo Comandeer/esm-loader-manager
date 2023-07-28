@@ -22,7 +22,7 @@ const testLoader = test.macro( ( t: ExecutionContext, {
 	env = {},
 	callback: userCallback
 }: TestLoaderOptions ): Promise<void> => {
-	const loaderPath = resolvePath( __dirname, '..', '..', '..', 'src', 'index.ts' );
+	const loaderPath = resolvePath( __dirname, '..', '..', '..', 'dist', 'esm-loader-manager.mjs' );
 	const loaderURL = pathToFileURL( loaderPath );
 	const cmd = 'tsx';
 	const params = [
