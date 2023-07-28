@@ -1,12 +1,17 @@
 import { cwd as processCWD } from 'node:process';
-import { execa } from 'execa';
+// eslint-disable-next-line ava/use-test
+import { ExecutionContext } from 'ava';
+import { ExecaReturnValue, execa } from 'execa';
 
-/**
- * @callback CmdTestCallback
- * @param {import('ava').ExecutionContext<unknown>} t Test execution context
- * @param {ChildProcessResult} results
- * @returns {void}
- */
+type CmdTestCallback = ( t: ExecutionContext, results: ExecaReturnValue ) => void | Promise<void>;
+
+interface CmdTestOptions {
+	cmd: string;
+	params?: Array<string>;
+	cwd?: string;
+	env?: Record<string, string>;
+	callback: CmdTestCallback;
+}
 
 /**
  * @typedef {Object} CmdTestOptions
@@ -16,19 +21,13 @@ import { execa } from 'execa';
  * @property {Record<string, string>} [env={}] Additional environment variables to pass to the command.
  * @property {CmdTestCallback} callback
  */
-
-/**
- * @param {import('ava').ExecutionContext<unknown>} t Test execution context
- * @param {CmdTestOptions} options
- * @returns {() => Promise}
- */
-async function testCmd( t, {
+async function testCmd( t: ExecutionContext, {
 	cmd,
 	callback,
 	params = [],
 	env = {},
 	cwd = processCWD()
-} = {} ) {
+}: CmdTestOptions ): Promise<void> {
 	let result;
 
 	try {

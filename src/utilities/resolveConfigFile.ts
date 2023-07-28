@@ -7,7 +7,7 @@ const configFileExtensions = [
 	'.mjs'
 ];
 
-async function resolveConfigFile( startDir, projectRoot ) {
+async function resolveConfigFile( startDir: string, projectRoot: string ): Promise<string | null> {
 	try {
 		const files = await readdir( startDir );
 
@@ -28,7 +28,7 @@ async function resolveConfigFile( startDir, projectRoot ) {
 
 		const dirUp = resolvePath( startDir, '..' );
 
-		return resolveConfigFile( dirUp );
+		return resolveConfigFile( dirUp, projectRoot );
 	} catch {
 		return null;
 	}
