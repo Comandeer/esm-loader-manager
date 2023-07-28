@@ -1,10 +1,6 @@
 import { platform } from 'node:os';
 
-/**
- * @param {string} posixPath
- * @returns {string} Path compatible with the operating system.
- */
-function createAbsolutePath( posixPath ) {
+function createAbsolutePath( posixPath: string ): string {
 	if ( platform() !== 'win32' ) {
 		return posixPath;
 	}

@@ -4,9 +4,9 @@
   "description": "Allows to use several ESM loaders in one Node.js application.",
   "type": "module",
   "exports": {
+    "types": "./dist/esm-loader-manager.d.ts",
     "import": "./dist/esm-loader-manager.mjs"
   },
-  "types": "esm-loader-manager.d.ts",
   "bin": {
     "esmlm": "./bin/esmlm.js"
   },
@@ -20,8 +20,8 @@
   },
   "engineStrict": true,
   "scripts": {
-    "lint": "eslint --ext .js,.cjs,.mjs ./src/**/*.js ./tests/**/*.js",
-    "pretest": "npm run lint && npm run build",
+    "lint": "eslint \"src/\" \"tests/\"",
+    "pretest": "npm run build",
     "test": "c8 ava",
     "build": "rlb",
     "version": "npm test && npm run build && git add -f dist/",
@@ -68,15 +68,20 @@
     "scope": "\\S+.*"
   },
   "devDependencies": {
-    "@comandeer/eslint-config": "^0.10.0",
-    "@comandeer/rollup-lib-bundler": "^0.20.0",
+    "@comandeer/eslint-config": "^0.11.1",
+    "@comandeer/rollup-lib-bundler": "^0.22.1",
+    "@types/mock-fs": "^4.13.1",
+    "@types/node": "^20.4.5",
     "ava": "^5.3.1",
-    "c8": "^8.0.0",
+    "c8": "^8.0.1",
     "commitplease": "^3.2.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.44.0",
+    "eslint": "^8.46.0",
     "husky": "^8.0.3",
-    "mock-fs": "^5.2.0"
+    "mock-fs": "^5.2.0",
+    "tslib": "^2.6.1",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "execa": "^7.1.1",

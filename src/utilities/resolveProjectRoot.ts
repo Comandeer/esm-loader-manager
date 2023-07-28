@@ -1,7 +1,7 @@
 import { readdir } from 'node:fs/promises';
 import { resolve as resolvePath } from 'pathe';
 
-async function resolveProjectRoot( startDir ) {
+async function resolveProjectRoot( startDir: string ): Promise<string | null> {
 	try {
 		const files = await readdir( startDir );
 

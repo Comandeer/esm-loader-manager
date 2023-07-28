@@ -2,7 +2,7 @@ import { isAbsolute } from 'pathe';
 import { relative as getRelativePath } from 'pathe';
 import { fileURLToPath } from 'node:url';
 
-function isInsideDir( dir, pathOrURL ) {
+function isInsideDir( dir: string, pathOrURL: string ): boolean {
 	const filePath = pathOrURL.startsWith( 'file://' ) ? fileURLToPath( pathOrURL ) : pathOrURL;
 	const relativePath = getRelativePath( dir, filePath );
 	const isNotEmptyPath = relativePath.length > 0;

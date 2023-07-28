@@ -1,8 +1,9 @@
 import test from 'ava';
 import isBuiltInModule from '../../src/utilities/isBuiltInModule.js';
+import { ModuleInfo } from '../../src/index.js';
 
 test( 'isBuiltInModule() returns true for the module with format set to builtin', ( t ) => {
-	const moduleInfo = {
+	const moduleInfo: ModuleInfo = {
 		url: 'whatever',
 		format: 'builtin'
 	};
@@ -12,7 +13,7 @@ test( 'isBuiltInModule() returns true for the module with format set to builtin'
 } );
 
 test( 'isBuiltInModule() returns true for the module without format but with URL starting from node:', ( t ) => {
-	const moduleInfo = {
+	const moduleInfo: ModuleInfo = {
 		url: 'node:whatever'
 	};
 	const result = isBuiltInModule( moduleInfo );
@@ -21,7 +22,7 @@ test( 'isBuiltInModule() returns true for the module without format but with URL
 } );
 
 test( 'isBuiltInModule() returns true for the module with format set to builtin and with URL starting from node:', ( t ) => {
-	const moduleInfo = {
+	const moduleInfo: ModuleInfo = {
 		url: 'node:whatever',
 		format: 'builtin'
 	};
@@ -31,7 +32,7 @@ test( 'isBuiltInModule() returns true for the module with format set to builtin 
 } );
 
 test( 'isBuiltInModule() returns false for the module with format set to module', ( t ) => {
-	const moduleInfo = {
+	const moduleInfo: ModuleInfo = {
 		url: 'whatever',
 		format: 'module'
 	};
@@ -41,7 +42,7 @@ test( 'isBuiltInModule() returns false for the module with format set to module'
 } );
 
 test( 'isBuiltInModule() returns false for the module with format set to module and with URL starting from node:', ( t ) => {
-	const moduleInfo = {
+	const moduleInfo: ModuleInfo = {
 		url: 'node:whatever',
 		format: 'module'
 	};

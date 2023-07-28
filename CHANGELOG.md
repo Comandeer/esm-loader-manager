@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
+## [0.5.0] – 2023-07-29
+### Changed
+* [#20]: **BREAKING CHANGE**: changed exported types due to rewrite in TS.
+
 ## [0.4.0] – 2023-07-16
 ### Changed
 * [#13]: **BREAKING CHANGE**: added the `pathe` dependency to replace `node:path` usage in all path-related tasks.
@@ -47,7 +51,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [#13]: https://github.com/Comandeer/esm-loader-manager/issues/13
 [#17]: https://github.com/Comandeer/esm-loader-manager/issues/17
 [#18]: https://github.com/Comandeer/esm-loader-manager/issues/18
+[#20]: https://github.com/Comandeer/esm-loader-manager/issues/20
 
+[0.5.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.1.0...v0.2.0

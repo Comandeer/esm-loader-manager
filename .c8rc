@@ -1,14 +1,10 @@
 {
+	"all": true,
 	"reporter": [
 		"text",
 		"lcov"
 	],
-
-	"include": [
-		"src/**/*.js"
-	],
-
-	"exclude": [
-		"src/__bin__/esmlm.js"
+	"src": [
+		"./src"
 	]
 }

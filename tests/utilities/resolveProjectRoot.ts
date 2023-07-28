@@ -44,7 +44,7 @@ test( 'resolveProjectRoot() returns null if reaches / without finding package.js
 test( 'resolveProjectRoot() returns null in case of any error', async ( t ) => {
 	const expectedConfigFilePath = null;
 	const nonExistentDirPath = '/hublabubla/';
-	const resolvedConfigFilePath = await resolveProjectRoot( nonExistentDirPath, nonExistentDirPath );
+	const resolvedConfigFilePath = await resolveProjectRoot( nonExistentDirPath );
 
 	t.is( resolvedConfigFilePath, expectedConfigFilePath );
 } );

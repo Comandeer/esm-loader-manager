@@ -23,8 +23,8 @@ const loaderArgsFixturePath = resolvePath( fixtureDirPath, 'loaderArgs' );
 const npmImportsFixturePath = resolvePath( fixtureDirPath, 'npmImports' );
 const builinModulesFixturePath = resolvePath( fixtureDirPath, 'builtinModules' );
 const multipleLoadersFixturePath = resolvePath( fixtureDirPath, 'multipleLoaders' );
-let tempDirPath;
-let noProjectRootFixturePath;
+let tempDirPath: string;
+let noProjectRootFixturePath: string;
 
 test.before( async () => {
 	const tempDirPrefix = joinPath( tmpdir(), 'esmlm' );

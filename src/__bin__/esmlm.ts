@@ -14,11 +14,11 @@ const loaderPath = resolvePath( __dirname, '..', 'dist', 'esm-loader-manager.mjs
 const loaderURL = pathToFileURL( loaderPath );
 const cwd = processCWD();
 const [ ,, passedEntryPoint, ...args ] = argv;
-const entryPoint = passedEntryPoint ? resolvePath( cwd, passedEntryPoint ) : cwd;
+const entryPoint = passedEntryPoint !== undefined ? resolvePath( cwd, passedEntryPoint ) : cwd;
 const cmd = 'node';
 const params = [
 	'--experimental-loader',
-	loaderURL,
+	loaderURL.href,
 	entryPoint,
 	...args
 ];
