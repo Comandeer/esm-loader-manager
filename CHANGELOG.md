@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
+## [0.5.1] – 2023-08-02
+### Fixed
+* [#24]: `tslib` was incorrectly marked as dev dependency instead of runtime one.
+
 ## [0.5.0] – 2023-07-29
 ### Changed
 * [#20]: **BREAKING CHANGE**: changed exported types due to rewrite in TS.
@@ -52,7 +56,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [#17]: https://github.com/Comandeer/esm-loader-manager/issues/17
 [#18]: https://github.com/Comandeer/esm-loader-manager/issues/18
 [#20]: https://github.com/Comandeer/esm-loader-manager/issues/20
+[#24]: https://github.com/Comandeer/esm-loader-manager/issues/24
 
+[0.5.1]: https://github.com/Comandeer/esm-loader-manager/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.2.0...v0.3.0
