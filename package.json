@@ -80,12 +80,12 @@
     "husky": "^8.0.3",
     "mock-fs": "^5.2.0",
     "publint": "^0.2.0",
-    "tslib": "^2.6.1",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },
   "dependencies": {
     "execa": "^7.1.1",
-    "pathe": "^1.1.1"
+    "pathe": "^1.1.1",
+    "tslib": "^2.6.1"
   }
 }
