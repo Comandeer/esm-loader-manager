@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * [#27]: support for Node 22.
 
 ### Changed
+* [#31]: **BREAKING CHANGE**: changed the default config file name from `.esmlmrc.js` to `esmlm.config.js`.
 * [#26]: **BREAKING CHANGE**: updated dependencies:
 
 	| Dependency | Old version | New version |
@@ -78,6 +79,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [#24]: https://github.com/Comandeer/esm-loader-manager/issues/24
 [#26]: https://github.com/Comandeer/esm-loader-manager/issues/26
 [#27]: https://github.com/Comandeer/esm-loader-manager/issues/27
+[#31]: https://github.com/Comandeer/esm-loader-manager/issues/31
 
 [0.6.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/Comandeer/esm-loader-manager/compare/v0.5.0...v0.5.1
