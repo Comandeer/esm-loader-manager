@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ---
 
 ## [0.6.0]
+### Added
+* [#27]: support for Node 22.
+
 ### Changed
 * [#26]: **BREAKING CHANGE**: updated dependencies:
 
@@ -17,6 +20,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 	| `tslib`    | `^2.6.1`    | `^2.6.2`    |
 
 	Dependencies with major version change are marked with the "⚠️" emoji.
+
+### Removed
+* [#27]: **BREAKING CHANGE**: support for Node < 20.10.0.
 
 
 ## [0.5.1] – 2023-08-02
@@ -71,6 +77,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [#20]: https://github.com/Comandeer/esm-loader-manager/issues/20
 [#24]: https://github.com/Comandeer/esm-loader-manager/issues/24
 [#26]: https://github.com/Comandeer/esm-loader-manager/issues/26
+[#27]: https://github.com/Comandeer/esm-loader-manager/issues/27
 
 [0.6.0]: https://github.com/Comandeer/esm-loader-manager/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/Comandeer/esm-loader-manager/compare/v0.5.0...v0.5.1
