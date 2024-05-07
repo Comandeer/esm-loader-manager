@@ -26,7 +26,7 @@
     "build": "rlb",
     "version": "npm test && npm run build && npm run lint-package && git add -f bin/ dist/",
     "postversion": "git rm -r --cached bin/ dist/ && git commit -m \"chore(dist): clean after release [ci skip]\" && git push origin && git push origin --tags",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -68,24 +68,24 @@
     "scope": "\\S+.*"
   },
   "devDependencies": {
-    "@comandeer/eslint-config": "^0.11.1",
-    "@comandeer/rollup-lib-bundler": "^0.22.1",
-    "@types/mock-fs": "^4.13.1",
-    "@types/node": "^20.4.5",
-    "ava": "^5.3.1",
-    "c8": "^8.0.1",
+    "@comandeer/eslint-config": "^0.13.1",
+    "@comandeer/rollup-lib-bundler": "^0.23.0",
+    "@types/mock-fs": "^4.13.4",
+    "@types/node": "^20.12.10",
+    "ava": "^6.1.3",
+    "c8": "^9.1.0",
     "commitplease": "^3.2.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.46.0",
-    "husky": "^8.0.3",
+    "eslint": "^8.57.0",
+    "husky": "^9.0.11",
     "mock-fs": "^5.2.0",
-    "publint": "^0.2.0",
-    "tsx": "^3.12.7",
-    "typescript": "^5.1.6"
+    "publint": "^0.2.7",
+    "tsx": "^4.9.3",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
-    "execa": "^7.1.1",
-    "pathe": "^1.1.1",
-    "tslib": "^2.6.1"
+    "execa": "^8.0.1",
+    "pathe": "^1.1.2",
+    "tslib": "^2.6.2"
   }
 }
