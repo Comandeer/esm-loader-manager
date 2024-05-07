@@ -15,7 +15,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.6.0"
+    "node": ">=20.10.0"
   },
   "engineStrict": true,
   "scripts": {
