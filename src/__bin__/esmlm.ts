@@ -16,9 +16,10 @@ const cwd = processCWD();
 const [ ,, passedEntryPoint, ...args ] = argv;
 const entryPoint = passedEntryPoint !== undefined ? resolvePath( cwd, passedEntryPoint ) : cwd;
 const cmd = 'node';
+const registerModule = `data:text/javascript,import { register } from 'node:module'; register( '${ loaderURL.href }' );`
 const params = [
-	'--experimental-loader',
-	loaderURL.href,
+	'--import',
+	registerModule,
 	entryPoint,
 	...args
 ];
