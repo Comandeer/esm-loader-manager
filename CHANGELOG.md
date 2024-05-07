@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
-## [0.6.0]
+## [0.6.0] – 2024-05-08
 ### Added
 * [#27]: support for Node 22.
 
