@@ -4,13 +4,13 @@
 
 Like [Pirates](https://github.com/danez/pirates) but for ESM.
 
-**Works with Node 16.12.0+**.
+**Works with Node 20.10.0+**.
 
 ⚠️ As ESM loaders are still experimental in Node.js, this package should also be considered experimental. **Use in production environment at your own risk!**
 
 ## How does it work?
 
-This package allows to use several [ESM loaders](https://nodejs.org/api/esm.html#loaders) inside one Node.js application. It basically provides an ESM loader that can be configured to pass some of importing modules to user-provided transformation functions (see [Examples](#Examples) section for more info).
+This package allows to use several [module customization hooks](https://nodejs.org/docs/latest-v20.x/api/module.html#customization-hooks) inside one Node.js application. It basically provides an ESM loader that can be configured to pass some of importing modules to user-provided transformation functions (see [Examples](#Examples) section for more info).
 
 **Built-in Node.js modules and modules located inside `node_modules` are ignored by the manager!**
 
@@ -26,10 +26,10 @@ The loader manager needs to be added as an ESM loader to your Node application. 
 
 ### Via Node.js flag
 
-This is probably the easiest way to use the loader manager. You can add it to your application using [the `--experimental-loader` flag](https://nodejs.org/api/cli.html#--experimental-loadermodule):
+This is probably the easiest way to use the loader manager. You can add it to your application using [the `--import` flag](https://nodejs.org/api/cli.html#--importmodule):
 
 ```shell
-node --experimental-loader=esm-loader-manager
+node --import=esm-loader-manager/register
 ```
 
 ### Via `esmlm` executable
@@ -84,7 +84,7 @@ The configuration file needs to export an object as a default export. This objec
 
 Each loader is an object with two methods: `matcher()` and `loader()`.
 
-#### matcher( url: string, context: [LoaderContext ](https://nodejs.org/api/esm.html#resolvespecifier-context-defaultresolve)): boolean
+#### matcher( url: string, context: [ResolveContext](https://nodejs.org/api/module.html#resolvespecifier-context-nextresolve) ): boolean
 
 The task of this method is to check if the module identified by the passed URL should be handled by this particular loader. If yes, it should return `true` and `false` otherwise.
 

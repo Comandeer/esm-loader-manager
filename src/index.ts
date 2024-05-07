@@ -13,7 +13,7 @@ import resolveProjectRoot from './utilities/resolveProjectRoot.js';
 import loadURL from './utilities/loadURL.js';
 
 type ModuleFormat = 'builtin' | 'commonjs' | 'json' | 'module' | 'wasm';
-type ImportAssertions = Record<string, unknown>;
+type ImportAttributes = Record<string, unknown>;
 type TypedArray =
 	| BigInt64Array
 	| BigUint64Array
@@ -29,13 +29,13 @@ type TypedArray =
 
 interface ResolverContext {
 	conditions: Array<string>;
-	importAssertions: ImportAssertions;
+	importAttributes: ImportAttributes;
 	parentURL?: string | undefined;
 }
 
 interface ResolverResult {
 	format: ModuleFormat | null | undefined;
-	importAssertions?: ImportAssertions;
+	importAssertions?: ImportAttributes;
 	shortCircuit?: boolean;
 	url: string;
 }
@@ -49,7 +49,7 @@ type NextResolver = (
 interface LoaderContext {
 	conditions: Array<string>;
 	format: ModuleFormat | null | undefined;
-	importAssertions: ImportAssertions;
+	importAttributes: ImportAttributes;
 }
 
 interface LoaderResult {
@@ -71,7 +71,7 @@ export interface ModuleInfo {
 
 export interface MatcherContext {
 	conditions: Array<string>;
-	importAssertions: ImportAssertions;
+	importAttributes: ImportAttributes;
 	parentURL?: string | undefined;
 }
 
