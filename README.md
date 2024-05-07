@@ -61,7 +61,7 @@ The loader manager does nothing on its own but you can declare your loaders insi
 
 ### Configuration file format
 
-The configuration file needs to be named `.esmlmrc.js` or `.esmlmrc.mjs`.
+The configuration file needs to be named `esmlm.config.js` or `esmlm.config.mjs`.
 
 The sample one could look like the one below:
 
@@ -99,15 +99,15 @@ The manager will look for the configuration file inside the CWD and go up until 
 ```
 - projectRoot/
 |- package.json
-|- .esmlmrc.js
+|- esmlm.config.js
 |- subdir/
 |  |- app.js
-|  |- .esmlmrc.js
+|  |- esmlm.config.js
 |- someOtherDir/
 |  |- someOtherApp.js
 ```
 
-If we launch Node.js inside `projectRoot/subdir`, the manager will use the `projectRoot/subdir/.esmlmrc.js` file. However, if we launch Node.js inside `projectRoot/someOtherDir` (which does not contain its own configuration file), the `projectRoot/.esmlmrc.js` one will be used.
+If we launch Node.js inside `projectRoot/subdir`, the manager will use the `projectRoot/subdir/esmlm.config.js` file. However, if we launch Node.js inside `projectRoot/someOtherDir` (which does not contain its own configuration file), the `projectRoot/esmlm.config.js` one will be used.
 
 If for some reason you want to have a config file under some other name, you can provide the path to it via `ESMLM_CONFIG` environment variable, e.g.
 
@@ -155,7 +155,7 @@ import samplePng from './sample.png';
 console.log( samplePng ); // data:image/png;base64,[…]
 ```
 
-**.esmlmrc.js**
+**esmlm.config.js**
 
 ```javascript
 export default {
