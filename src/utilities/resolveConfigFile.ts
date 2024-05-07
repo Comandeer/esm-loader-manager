@@ -1,7 +1,7 @@
 import { readdir } from 'node:fs/promises';
 import { resolve as resolvePath } from 'pathe';
 
-const configFileName = '.esmlmrc';
+const configFileName = 'esmlm.config';
 const configFileExtensions = [
 	'.js',
 	'.mjs'
